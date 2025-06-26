@@ -1,0 +1,113 @@
+import { NavLink } from "react-router-dom";
+import Menu from "./menu/Menu.component";
+import { useState } from "react";
+
+function Header({ mode = "standart" }: { mode?: "standart" | "sitebar" }) {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  return (
+    <header className="pt-[10px] px-[30px] fixed w-[100%] top-0 pb-[10px]  z-1   bg_c_0 transition-[background-color] duration-1000">
+      <div className="mx-auto flex justify-between items-center">
+        <nav className={`flex items-center gap-6  `}>
+          <NavLink
+            to="//"
+            className={({ isActive }) =>
+              `text-text_c_0-light dark:text-text_c_0-dark text-[18px] sm:text-[24px] font-bold ${
+                isActive ? "underline" : ""
+              } ${mode == "sitebar" ? "hidden" : ""}`
+            }
+          >
+            Paid Email
+          </NavLink>
+          <div className="absolute left-[210px] flex items-center gap-6">
+            <NavLink
+              to="/Categories"
+              className={({ isActive }) =>
+                `text-text_c_0-light dark:text-text_c_0-dark text-base hidden lg:block ${
+                  isActive ? "underline" : ""
+                }`
+              }
+            >
+              Categories
+            </NavLink>
+            <NavLink
+              to="/about"
+              className={({ isActive }) =>
+                `text-text_c_0-light dark:text-text_c_0-dark text-base hidden lg:block ${
+                  isActive ? "underline" : ""
+                }`
+              }
+            >
+              About us
+            </NavLink>
+            <NavLink
+              to="/HowItWorks"
+              className={({ isActive }) =>
+                `text-text_c_0-light dark:text-text_c_0-dark text-base hidden lg:block ${
+                  isActive ? "underline" : ""
+                }`
+              }
+            >
+              How it works
+            </NavLink>
+            <NavLink
+              to="/Registration"
+              className={({ isActive }) =>
+                `text-text_c_0-light dark:text-text_c_0-dark text-base hidden lg:block ${
+                  isActive ? "underline" : ""
+                }`
+              }
+            >
+              Registration as a influencer
+            </NavLink>
+          </div>
+        </nav>
+        <div className="flex items-center gap-2">
+          <div className="relative flex items-center">
+            <input
+              type="search"
+              placeholder="Search"
+              className="pl-10 pr-2 py-1.5 h-[36px] bg_c_2 rounded-ful text_c_0 w-30 rounded-2xl sm:w-48 text-sm placeholder-[#9CA3AF] focus:outline-none"
+              aria-label="Search"
+            />
+            <button
+              type="submit"
+              className="absolute left-3 top-1/2 transform -translate-y-1/2 bg-transparent border-none cursor-pointer p-0"
+              aria-label="Submit search"
+            >
+              <img src="search.svg" alt="Search icon" className="w-4 h-4" />
+            </button>
+          </div>
+          <button
+            type="submit"
+            className="w-[28px] h-[28px] hidden lg:block cursor-pointer"
+          >
+            <img src="globe.svg" className="w-[28px] h-[28px]" />
+          </button>
+          <NavLink
+            to="/LogIn"
+            className={({ isActive }) =>
+              `text-[#A3AED0] hidden lg:block text-sm ${
+                isActive ? "underline" : ""
+              }`
+            }
+          >
+            <div className="py-1.5 bg- h-[36px] w-[70px] rounded-full px-[15px]">
+              <p>Log in</p>
+            </div>
+          </NavLink>
+          <button
+            type="submit"
+            className="w-[28px] h-[28px] lg:hidden cursor-pointer"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            <img src="menu.svg" className="w-[28px] h-[28px]" />
+          </button>
+        </div>
+      </div>
+      <Menu menuOpen={menuOpen} />
+    </header>
+  );
+}
+
+export default Header;

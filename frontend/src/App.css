@@ -1,0 +1,43 @@
+@config "../tailwind.config.ts";
+@import "tailwindcss";
+
+* {
+  /* margin: 0; */
+  /* padding: 0; */
+  box-sizing: border-box;
+}
+
+.dark body {
+  background-color: theme("colors.bg_c_0.dark");
+}
+body {
+  background-color: theme("colors.bg_c_0.light");
+  transition: background-color 1s;
+}
+
+.bg_c_0 {
+  @apply bg-bg_c_0-light dark:bg-bg_c_0-dark  transition-[background-color] duration-1000;
+}
+
+.bg_c_1 {
+  @apply bg-bg_c_1-light dark:bg-bg_c_1-dark  transition-[background-color] duration-1000;
+}
+
+.bg_c_2 {
+  @apply bg-bg_c_2-light dark:bg-bg_c_2-dark  transition-[background-color] duration-1000;
+}
+
+
+.text_c_0 {
+  @apply text-text_c_0-light dark:text-text_c_0-dark;
+}
+
+.main_color{
+  @apply bg-main_color-light dark:bg-main_color-dark;
+}
+
+.menu_color {
+  @apply bg-menu_color-light dark:bg-menu_color-dark transition-[background-color] duration-1000;
+}
+
+
