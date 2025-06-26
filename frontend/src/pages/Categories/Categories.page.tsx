@@ -1,12 +1,95 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Footer from "../../components/footer/Footer.component";
 import Header from "../../components/header/Header.component";
 import CategoriesCart from "./components/CategoriesCart.component";
 import CategoriesSitebar from "./components/CategoriesSitebar.component";
 import Person from "./components/Person.component";
+import type { user } from "../../Types/user";
 
 function Categories() {
   const [CategoriesSitebarOpen, setCategoriesSitebarOpen] = useState(false);
+
+  const [userList, setUserList] = useState([
+    {
+      id: 1,
+      name: "Ruben",
+      firstName: "Titanyan",
+      age: 24,
+      Bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      AvatarURL: "pers1.png",
+      rating: 4.5,
+      pricePerOneMessage: 19.99,
+      location: "Yerevan, Armenia",
+      profession: "Actor",
+      hor: 1,
+    },
+  ] as user[]);
+
+
+  useEffect(() => {
+    // Simulate fetching user data from an API
+    const fetchUsers = async () => {
+      // Here you would typically make an API call to fetch users
+      // For this example, we are using a static user list
+      setUserList([
+        {
+          id: 1,
+          name: "Ruben",
+          firstName: "Titanyan",
+          age: 24,
+          Bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+          AvatarURL: "pers1.png",
+          rating: 4.5,
+          pricePerOneMessage: 19.99,
+          location: "Yerevan, Armenia",
+          profession: "Actor",
+          hor: 1,
+        },
+        {
+          id: 2,
+          name: "Anna",
+          firstName: "Petrosyan",
+          age: 22,
+          Bio: "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+          AvatarURL: "pers2.png",
+          rating: 4.7,
+          pricePerOneMessage: 15.99,
+          location: "Yerevan, Armenia",
+          profession: "Singer",
+          hor: 2,
+        },
+        {
+          id: 3,
+          name: "Aram",
+          firstName: "Sargsyan",
+          age: 30,
+          Bio: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+          AvatarURL: "pers1.png",
+          rating: 4.8,
+          pricePerOneMessage: 25.99,
+          location: "Yerevan, Armenia",
+          profession: "Director",
+          hor: 3,
+        },
+        {
+          id: 4,
+          name: "Lilit",
+          firstName: "Grigoryan",
+          age: 28,
+          Bio: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+          AvatarURL: "pers2.png",
+          rating: 4.6,
+          pricePerOneMessage: 18.99,
+          location: "Yerevan, Armenia",
+          profession: "Model",
+          hor: 1,
+        }
+      ]);
+    };
+
+    fetchUsers();
+  }, []);
+
   return (
     <>
       <Header mode="sitebar" />
@@ -74,21 +157,22 @@ function Categories() {
           </div>
 
           <div className="w-full flex flex-wrap mb-5 justify-center lg:justify-normal ">
-            <Person url="pers1.png" />
-            <Person url="pers1.png" />
-            <Person url="pers1.png" />
-            <Person url="pers1.png" />
-            <Person url="pers1.png" />
-            <Person url="pers1.png" />
-            <Person url="sport.png" />
-            <Person url="pers1.png" />
-            <Person url="pers1.png" />
-            <Person url="pers1.png" />
-            <Person url="pers1.png" />
-            <Person url="sport.png" />
-            <Person url="pers1.png" />
-            <Person url="pers1.png" />
-            <Person url="pers1.png" />
+            {
+              userList.map((user) => (
+                <Person
+                  id={user.id ?? 0}
+                  name={user.name ?? ""}
+                  firstName={user.firstName ?? ""}
+                  age={user.age}
+                  rating={user.rating}
+                  pricePerOneMessage={user.pricePerOneMessage}
+                  hor={user.hor}
+                  key={user.id ?? 0}
+                  AvatarURL={user.AvatarURL}
+                />
+              ))
+            }
+            
           </div>
           <div className="w-full flex  mb-5 mt-5 ">
             <div>

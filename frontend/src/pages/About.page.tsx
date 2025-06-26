@@ -58,6 +58,26 @@ function About() {
           </div>
         </div>
 
+        <div className="max-w-[500px] m-auto text_c_0">
+          <div>
+            <p className="text-center">FAQ</p>
+          </div>
+          <div className="px-2.5">
+            <div className="bg_c_1  t_c_1000 flex justify-between  p-2.5 px-5 rounded-2xl my-3">
+              <p>What’s up</p>
+              <img src="barIcon.svg" alt="" />
+            </div>
+            <div className="bg_c_1 t_c_1000 flex justify-between  p-2.5 px-5 rounded-2xl my-3">
+              <p>What’s up</p>
+              <img src="barIcon.svg" alt="" />
+            </div>
+            <div className="bg_c_1 t_c_1000 flex justify-between  p-2.5 px-5 rounded-2xl my-3">
+              <p>What’s up</p>
+              <img src="barIcon.svg" alt="" />
+            </div>
+          </div>
+        </div>
+
         <div className="flex justify-center mt-5 mb-10">
           <button className="main_color   w-[150px] text-white rounded-full px-4 py-2">
             LABEL

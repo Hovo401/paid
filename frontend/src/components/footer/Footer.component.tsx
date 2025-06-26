@@ -12,8 +12,11 @@ function FooterColumn() {
 
 function Footer() {
   const [darkMode, setDarkMode] = useState(false);
+
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
+    localStorage.setItem("darkMode", (+darkMode + 0).toString());
+
     document.documentElement.classList.toggle("dark", !darkMode);
   };
 

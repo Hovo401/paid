@@ -9,8 +9,16 @@ import RegInfluencer from "./pages/RegistrationInfluencer.page";
 import Login from "./pages/Login.page";
 import NotFound from "./pages/NotFound.page";
 import Registration from "./pages/Registration.page";
+import { useEffect } from "react";
+import UserPage from "./pages/UserPage/User.page";
+import MainAccaunt from "./pages/accaunt/MainAccaunt.Page";
 
 function App() {
+  useEffect(() => {
+    const darkMode = localStorage.getItem("darkMode") ?? 0;
+    document.documentElement.classList.toggle("dark", !+darkMode);
+  }, []);
+
   return (
     <div className="min-h-screen w-full max-w-full flex flex-grow flex-col  pt-[50px] relative">
       <BrowserRouter basename="/paidemail">
@@ -23,6 +31,9 @@ function App() {
           <Route path="/RegInfluencer" element={<RegInfluencer />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/Registration" element={<Registration />} />
+          <Route path="/UserPage" element={<UserPage />} />
+          <Route path="/accaunt" element={<MainAccaunt />} />
+
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

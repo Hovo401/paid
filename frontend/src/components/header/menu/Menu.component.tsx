@@ -7,16 +7,25 @@ function Menu({ menuOpen }: { menuOpen: boolean }) {
         menuOpen ? "translate-x-0" : "translate-x-full "
       }`}
     >
-      <nav className="flex flex-col items-center justify-center gap-3 p-5">
+      <nav className="flex flex-col text_c_0 items-center justify-center gap-3 p-5">
+        <NavLink
+          to="/accaunt"
+          className={({ isActive }) => `${isActive ? "underline" : ""}`}
+        >
+          <div className="flex items-center gap-3 cursor-pointer hover:underline">
+            <img src="personIcon.svg" className="w-[18px] h-[18px]" alt="" />
+            <p>Accaunt</p>
+          </div>
+        </NavLink>
         <NavLink
           to="/LogIn"
           className={({ isActive }) =>
-            `text-[#A3AED0]  text-sm ${isActive ? "underline" : ""}`
+            `text-text_c_0-light dark:text-text_c_0-dark text-base  text-sm ${
+              isActive ? "underline" : ""
+            }`
           }
         >
-          <div className="py-1.5 bg-[#FFFFFF] h-[36px] w-[70px] rounded-full px-[15px]">
-            <p>Log in</p>
-          </div>
+          <p>Log in</p>
         </NavLink>
         <NavLink
           to="/Categories"

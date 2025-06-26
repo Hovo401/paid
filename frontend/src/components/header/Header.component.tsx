@@ -6,7 +6,7 @@ function Header({ mode = "standart" }: { mode?: "standart" | "sitebar" }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="pt-[10px] h-[56px] px-[30px] fixed w-[100%] top-0 pb-[10px]  z-100  border-0  bg_c_0 t_c_1000 transition-[background-color] duration-1000">
+    <header className="pt-[10px] h-[56px] pl-[30px] pr-[10px] fixed w-[100%] top-0 pb-[10px]  z-100  border-0  bg_c_0 t_c_1000 transition-[background-color] duration-1000">
       <div className="mx-auto flex justify-between items-center">
         <nav className={`flex items-center gap-6  `}>
           <div
@@ -18,7 +18,7 @@ function Header({ mode = "standart" }: { mode?: "standart" | "sitebar" }) {
               } `}
           ></div>
           <NavLink
-            to="//"
+            to="/"
             className={({ isActive }) =>
               `text-text_c_0-light dark:text-text_c_0-dark text-[18px] sm:text-[24px] font-bold ${
                 isActive ? "underline" : ""
@@ -92,6 +92,14 @@ function Header({ mode = "standart" }: { mode?: "standart" | "sitebar" }) {
           >
             <img src="globe.svg" className="w-[28px] h-[28px]" />
           </button>
+          <NavLink to="/accaunt">
+            <button
+              type="submit"
+              className="w-[28px] h-[28px] hidden lg:block cursor-pointer"
+            >
+              <img src="personIcon.svg" className="w-[23px] h-[23px]" />
+            </button>
+          </NavLink>
           <NavLink
             to="/LogIn"
             className={({ isActive }) =>

@@ -16,15 +16,15 @@ body {
 }
 
 .bg_c_0 {
-  @apply bg-bg_c_0-light dark:bg-bg_c_0-dark ;
+  @apply bg-bg_c_0-light dark:bg-bg_c_0-dark;
 }
 
 .bg_c_1 {
-  @apply bg-bg_c_1-light dark:bg-bg_c_1-dark  ;
+  @apply bg-bg_c_1-light dark:bg-bg_c_1-dark;
 }
 
 .bg_c_2 {
-  @apply bg-bg_c_2-light dark:bg-bg_c_2-dark  ;
+  @apply bg-bg_c_2-light dark:bg-bg_c_2-dark;
 }
 .t_c_1000 {
   @apply transition-[background-color] duration-1000;
@@ -34,20 +34,18 @@ body {
   @apply text-text_c_0-light dark:text-text_c_0-dark;
 }
 
-.main_color{
+.main_color {
   @apply bg-main_color-light dark:bg-main_color-dark;
 }
 
-.main_color:hover{
-  background-color: #3B2BC1;
+.main_color:hover {
+  background-color: #3b2bc1;
 }
 
-.main_color:active{
-  background-color: #11047A;
+.main_color:active {
+  background-color: #11047a;
 }
 
 .menu_color {
-  @apply bg-menu_color-light dark:bg-menu_color-dark  ;
+  @apply bg-menu_color-light dark:bg-menu_color-dark;
 }
-
-
