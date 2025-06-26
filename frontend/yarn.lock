@@ -510,15 +510,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@heroicons/react@npm:^2.2.0":
-  version: 2.2.0
-  resolution: "@heroicons/react@npm:2.2.0"
-  peerDependencies:
-    react: ">= 16 || ^19.0.0-rc"
-  checksum: 10c0/f8d3cf689b56716339c91df3542f3948115042d1e70e6bc940a3f3e347c0bc78b56aa563917fbd7ce097fe2f38ebb21bffb0db39be914cbc545a754bddae9ab4
-  languageName: node
-  linkType: hard
-
 "@hookform/resolvers@npm:^5.1.1":
   version: 5.1.1
   resolution: "@hookform/resolvers@npm:5.1.1"
@@ -1959,7 +1950,6 @@ __metadata:
   resolution: "frontend@workspace:."
   dependencies:
     "@eslint/js": "npm:^9.25.0"
-    "@heroicons/react": "npm:^2.2.0"
     "@hookform/resolvers": "npm:^5.1.1"
     "@tailwindcss/vite": "npm:^4.1.10"
     "@types/react": "npm:^19.1.2"
@@ -1973,6 +1963,7 @@ __metadata:
     react: "npm:^19.1.0"
     react-dom: "npm:^19.1.0"
     react-hook-form: "npm:^7.58.1"
+    react-range: "npm:^1.10.0"
     react-router-dom: "npm:^7.6.2"
     tailwindcss: "npm:^4.1.10"
     typescript: "npm:~5.8.3"
@@ -2857,6 +2848,16 @@ __metadata:
   peerDependencies:
     react: ^16.8.0 || ^17 || ^18 || ^19
   checksum: 10c0/981b9982b7eb497c3afff86c219175fdd4d92a24e3533518035239545dda23f5ebc6ba647fb29a250f768bdf811ba413094ce0103fbf36b436737fc18aa1bb49
+  languageName: node
+  linkType: hard
+
+"react-range@npm:^1.10.0":
+  version: 1.10.0
+  resolution: "react-range@npm:1.10.0"
+  peerDependencies:
+    react: "*"
+    react-dom: "*"
+  checksum: 10c0/ca0a7c817fb1e18b15939d9a5ce14acb559c6f2b2f694de04f82e5f7493a16e1be54301f32f508277b302f557a5171ae9771dd7d869bc2c48ec52deaded2a0c2
   languageName: node
   linkType: hard
 

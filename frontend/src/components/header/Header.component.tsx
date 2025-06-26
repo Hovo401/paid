@@ -6,15 +6,23 @@ function Header({ mode = "standart" }: { mode?: "standart" | "sitebar" }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="pt-[10px] px-[30px] fixed w-[100%] top-0 pb-[10px]  z-1   bg_c_0 transition-[background-color] duration-1000">
+    <header className="pt-[10px] h-[56px] px-[30px] fixed w-[100%] top-0 pb-[10px]  z-100  border-0  bg_c_0 t_c_1000 transition-[background-color] duration-1000">
       <div className="mx-auto flex justify-between items-center">
         <nav className={`flex items-center gap-6  `}>
+          <div
+            className={` absolute h-[55px] w-[200px] left-0 top-0 -z-10 border-0 transition-[background-color] duration-1000
+              ${
+                mode == "sitebar"
+                  ? "md:bg-bg_c_1-light dark:md:bg-bg_c_1-dark"
+                  : " "
+              } `}
+          ></div>
           <NavLink
             to="//"
             className={({ isActive }) =>
               `text-text_c_0-light dark:text-text_c_0-dark text-[18px] sm:text-[24px] font-bold ${
                 isActive ? "underline" : ""
-              } ${mode == "sitebar" ? "hidden" : ""}`
+              } `
             }
           >
             Paid Email
@@ -67,7 +75,7 @@ function Header({ mode = "standart" }: { mode?: "standart" | "sitebar" }) {
             <input
               type="search"
               placeholder="Search"
-              className="pl-10 pr-2 py-1.5 h-[36px] bg_c_2 rounded-ful text_c_0 w-30 rounded-2xl sm:w-48 text-sm placeholder-[#9CA3AF] focus:outline-none"
+              className="pl-10 pr-2 py-1.5 h-[36px] bg_c_2 t_c_1000 rounded-ful text_c_0 w-30 rounded-2xl sm:w-48 text-sm placeholder-[#9CA3AF] focus:outline-none"
               aria-label="Search"
             />
             <button
@@ -92,13 +100,13 @@ function Header({ mode = "standart" }: { mode?: "standart" | "sitebar" }) {
               }`
             }
           >
-            <div className="py-1.5 bg- h-[36px] w-[70px] rounded-full px-[15px]">
+            <div className="py-1.5 bg- h-[36px] w-[70px] rounded-full bg_c_2 t_c_1000 px-[15px]">
               <p>Log in</p>
             </div>
           </NavLink>
           <button
             type="submit"
-            className="w-[28px] h-[28px] lg:hidden cursor-pointer"
+            className="w-[28px] h-[28px] lg:hidden cursor-pointer "
             onClick={() => setMenuOpen(!menuOpen)}
           >
             <img src="menu.svg" className="w-[28px] h-[28px]" />

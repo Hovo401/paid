@@ -38,12 +38,12 @@ function Footer() {
             <FooterColumn />
           </div>
           <div className="flex flex-col mb-4 mx-auto md:mx-0 md:mb-0 mt-[15px]">
-            <button className="bg-[#4318FF] cursor-pointer w-[150px] text-white rounded-full px-4 py-2">
+            <button className="main_color cursor-pointer w-[150px] text-white rounded-full px-4 py-2">
               LABEL
             </button>
             <button
               onClick={toggleDarkMode}
-              className="bg-[#4318FF] cursor-pointer w-[150px] text-white rounded-full px-4 py-2 mt-2"
+              className="main_color cursor-pointer w-[150px] text-white rounded-full px-4 py-2 mt-2"
             >
               Dark Mode
             </button>

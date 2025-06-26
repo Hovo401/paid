@@ -17,7 +17,7 @@ function Login() {
     let isValid = true;
     const newErrors = { email: "", password: "" };
 
-    // Email validation
+
     if (!formData.email) {
       newErrors.email = "Email is required";
       isValid = false;
@@ -26,7 +26,7 @@ function Login() {
       isValid = false;
     }
 
-    // Password validation
+
     if (!formData.password) {
       newErrors.password = "Password is required";
       isValid = false;
@@ -62,7 +62,7 @@ function Login() {
     <>
       <Header />
       <main className="w-[100%] flex-grow my-10">
-        <div className="bg_c_1 p-5 max-w-[400px] mx-auto  shadow-lg rounded-2xl">
+        <div className="bg_c_1 t_c_1000 p-5 max-w-[400px] mx-auto  shadow-lg rounded-2xl">
           <div>
             <h2 className="text-2xl font-bold text_c_0 mb-6">Login</h2>
           </div>
@@ -80,7 +80,7 @@ function Login() {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg_c_2 dark:border-gray-600 dark:text-white"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg_c_2 t_c_1000 dark:border-gray-600 dark:text-white"
                 placeholder="Enter your email"
               />
               {errors.email && (
@@ -100,7 +100,7 @@ function Login() {
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg_c_2 dark:border-gray-600 dark:text-white"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg_c_2 t_c_1000 dark:border-gray-600 dark:text-white"
                 placeholder="Enter your password"
               />
               {errors.password && (
@@ -115,13 +115,14 @@ function Login() {
             </button>
           </form>
           <div className="mt-4 text-center text1_">
-            <p className="text_c_0"
-            // to="/RegInfluencer"
-            // className={({ isActive }) =>
-            //   `text-text_c_0-light dark:text-text_c_0-dark text-base hidden lg:block ${
-            //     isActive ? "underline" : ""
-            //   }`
-            // }
+            <p
+              className="text_c_0"
+              // to="/RegInfluencer"
+              // className={({ isActive }) =>
+              //   `text-text_c_0-light dark:text-text_c_0-dark text-base hidden lg:block ${
+              //     isActive ? "underline" : ""
+              //   }`
+              // }
             >
               Forgot your password?
             </p>

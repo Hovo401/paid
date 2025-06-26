@@ -12,7 +12,7 @@ import Registration from "./pages/Registration.page";
 
 function App() {
   return (
-    <div className="min-h-screen flex flex-col w-[100%] pt-[50px] relative">
+    <div className="min-h-screen w-full max-w-full flex flex-grow flex-col  pt-[50px] relative">
       <BrowserRouter basename="/paidemail">
         <Routes>
           <Route path="/" element={<Navigate to="/home" replace />} />

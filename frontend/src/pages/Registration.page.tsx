@@ -32,14 +32,13 @@ function Registration() {
 
   const onSubmit = (data: any) => {
     console.log("Form submitted:", data);
-    // Add your registration API call here
   };
 
   return (
     <>
       <Header />
       <main className="w-[100%] flex-grow text_c_0  min-h-screen flex items-center justify-center my-10">
-        <div className="w-full max-w-md p-6  bg_c_1  shadow-lg rounded-2xl">
+        <div className="w-full max-w-md p-6  bg_c_1 t_c_1000  shadow-lg rounded-2xl">
           <h2 className="text-2xl font-bold  text-center mb-6">
             Apply to join Paid Email
           </h2>
@@ -56,7 +55,7 @@ function Registration() {
               <input
                 {...register("name")}
                 id="name"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg_c_2 dark:border-gray-600 dark:text-white"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg_c_2 t_c_1000 dark:border-gray-600 dark:text-white"
                 placeholder="Name"
               />
               {errors.name && (
@@ -76,7 +75,7 @@ function Registration() {
                 {...register("email")}
                 type="email"
                 id="email"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg_c_2 dark:border-gray-600 dark:text-white"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg_c_2 t_c_1000 dark:border-gray-600 dark:text-white"
                 placeholder="Email"
               />
               {errors.email && (
@@ -95,7 +94,7 @@ function Registration() {
               <input
                 {...register("phoneNumber")}
                 id="phoneNumber"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg_c_2 dark:border-gray-600 dark:text-white"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg_c_2 t_c_1000 dark:border-gray-600 dark:text-white"
                 placeholder="Phone Number"
               />
               {errors.phoneNumber && (
@@ -114,7 +113,7 @@ function Registration() {
               <input
                 {...register("region")}
                 id="region"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg_c_2 dark:border-gray-600 dark:text-white"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg_c_2 t_c_1000 dark:border-gray-600 dark:text-white"
                 placeholder="Region"
               />
               {errors.region && (
@@ -133,7 +132,7 @@ function Registration() {
               <input
                 {...register("socialProofs")}
                 id="socialProofs"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg_c_2 dark:border-gray-600 dark:text-white"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg_c_2 t_c_1000 dark:border-gray-600 dark:text-white"
                 placeholder="Social Proofs"
               />
               {errors.socialProofs && (
@@ -152,7 +151,7 @@ function Registration() {
               <input
                 {...register("yourHandle")}
                 id="yourHandle"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg_c_2 dark:border-gray-600 dark:text-white"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg_c_2 t_c_1000 dark:border-gray-600 dark:text-white"
                 placeholder="Your Handle"
               />
               {errors.yourHandle && (
@@ -171,7 +170,7 @@ function Registration() {
               <input
                 {...register("followers")}
                 id="followers"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg_c_2 dark:border-gray-600 dark:text-white"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg_c_2 t_c_1000 dark:border-gray-600 dark:text-white"
                 placeholder="How many followers do you have?"
               />
               {errors.followers && (

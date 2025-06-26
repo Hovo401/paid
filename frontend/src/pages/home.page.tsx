@@ -16,7 +16,7 @@ function Home() {
               Lorem Ipsum has been the industry's standard dummy text ever since
               the 1500s, when an unknown printer took a galley of type and{" "}
             </p>
-            <button className="bg-[#4318FF] max-w-[150px]  text-white rounded-full px-4 py-2">
+            <button className="main_color max-w-[150px]  text-white rounded-full px-4 py-2">
               LABEL
             </button>
           </div>

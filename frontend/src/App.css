@@ -16,17 +16,19 @@ body {
 }
 
 .bg_c_0 {
-  @apply bg-bg_c_0-light dark:bg-bg_c_0-dark  transition-[background-color] duration-1000;
+  @apply bg-bg_c_0-light dark:bg-bg_c_0-dark ;
 }
 
 .bg_c_1 {
-  @apply bg-bg_c_1-light dark:bg-bg_c_1-dark  transition-[background-color] duration-1000;
+  @apply bg-bg_c_1-light dark:bg-bg_c_1-dark  ;
 }
 
 .bg_c_2 {
-  @apply bg-bg_c_2-light dark:bg-bg_c_2-dark  transition-[background-color] duration-1000;
+  @apply bg-bg_c_2-light dark:bg-bg_c_2-dark  ;
 }
-
+.t_c_1000 {
+  @apply transition-[background-color] duration-1000;
+}
 
 .text_c_0 {
   @apply text-text_c_0-light dark:text-text_c_0-dark;
@@ -36,8 +38,16 @@ body {
   @apply bg-main_color-light dark:bg-main_color-dark;
 }
 
+.main_color:hover{
+  background-color: #3B2BC1;
+}
+
+.main_color:active{
+  background-color: #11047A;
+}
+
 .menu_color {
-  @apply bg-menu_color-light dark:bg-menu_color-dark transition-[background-color] duration-1000;
+  @apply bg-menu_color-light dark:bg-menu_color-dark  ;
 }
 
 

@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 function Menu({ menuOpen }: { menuOpen: boolean }) {
   return (
     <menu
-      className={`fixed max-w-[440px] z-10 min-w-[200px] w-[100%] h-[100%] menu_color top-[56px]  right-0 transition-transform duration-300   ${
+      className={`fixed max-w-[440px] z-10 min-w-[200px] w-[100%] h-[100%] menu_color top-[56px]  right-0 transition duration-300   ${
         menuOpen ? "translate-x-0" : "translate-x-full "
       }`}
     >

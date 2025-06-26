@@ -9,7 +9,7 @@ function About() {
         <h1 className="text-center text-2xl mt-5 font-bold text-text_c_0-light dark:text-text_c_0-dark ">
           About
         </h1>
-        <div className=" flex flex-col justify-center md:justify-normal md:flex-row m-auto my-[30px] py-[16px] px-[8px] w-[90%]  rounded-[16px] bg_c_1  transition-[background-color] duration-1000">
+        <div className=" flex flex-col justify-center md:justify-normal md:flex-row m-auto my-[30px] py-[16px] px-[8px] w-[90%]  rounded-[16px] bg_c_1 t_c_1000  transition-[background-color] duration-1000">
           <div className=" text-text_c_0-light dark:text-text_c_0-dark order-2 md:order-none flex-1/2 p-10 md:pt-30 md:pb-50 flex flex-col justify-between ">
             <h2 className="text-[30px] font-bold mb-2">
               Lorem Ipsum is simply dummy text of the{" "}
@@ -18,7 +18,7 @@ function About() {
               Lorem Ipsum has been the industry's standard dummy text ever since
               the 1500s, when an unknown printer took a galley of type and{" "}
             </p>
-            <button className="bg-[#4318FF] max-w-[150px]  text-white rounded-full px-4 py-2">
+            <button className="main_color max-w-[150px]  text-white rounded-full px-4 py-2">
               LABEL
             </button>
           </div>
@@ -59,7 +59,7 @@ function About() {
         </div>
 
         <div className="flex justify-center mt-5 mb-10">
-          <button className="bg-[#4318FF]   w-[150px] text-white rounded-full px-4 py-2">
+          <button className="main_color   w-[150px] text-white rounded-full px-4 py-2">
             LABEL
           </button>
         </div>
