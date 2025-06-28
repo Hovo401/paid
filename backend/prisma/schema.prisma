@@ -1,0 +1,65 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  User
+  Freelancer
+  Admin
+}
+
+enum Gender {
+  Male
+  Female
+  Demigirl
+  Neutrois
+  Other
+}
+
+model User {
+  id            Int       @id @default(autoincrement())
+  name          String
+  firstName     String    @default("")
+  email         String    @unique
+  age           Int       @default(0)
+  Bio           String    @default("")
+  avatarURL     String?
+  rating        Float     @default(5)
+  pricePerOneMessage Float?
+  location      String?
+  profession    String?
+  hor           Float?
+  birthday      DateTime?
+
+  inbox         String    @default("[]")
+  send          String    @default("[]")
+  draft         String    @default("[]")
+
+  gender        Gender    @default(Neutrois)
+  password      String
+  roles         Role      @default(User)
+  blocked       Boolean   @default(false)
+  createdAt     DateTime  @default(now())
+}
+
+model Session {
+  id        Int      @id @default(autoincrement())
+  fullName  String   @unique
+  content   String
+  about     String?
+  skills    String?
+  experience String?
+  education String?
+  languages String?
+  price     Float    @default(0)
+  rating    Int?
+  authorId  Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  videoUrl  String   @default("[]")
+}

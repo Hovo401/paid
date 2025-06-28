@@ -1,29 +1,47 @@
-interface user extends userCart{
-    id: number;
-    name: string;
-    firstName: string;
-    age: number;
-    Bio: string;
-    AvatarURL: string;
-    rating: number;
-    pricePerOneMessage: number;
-    location: string;
-    profession: string;
-    hor: number
-  }
+interface userCart {
+  id: number;
+  name: string;
+  firstName?: string;
+  email?: string;
+  age?: number;
+  Bio?: string;
+  avatarURL?: string;
+  rating?: number;
+  pricePerOneMessage?: number;
+  location?: string;
+  profession?: string;
 
-  interface userCart  {
-    id: number;
-    name: string;
-    firstName?: string;
-    age?: number;
-    Bio?: string;
-    AvatarURL?: string;
-    rating?: number;
-    pricePerOneMessage?: number;
-    location?: string;
-    profession?: string;
-    hor?: number
-  }
+  hor?: number;
+  gender?: string;
+  roles?: string;
+  createdAt?: string;
 
-  export type { userCart, user };
+  inbox?: string;
+  send?: string;
+  draft?: string;
+}
+
+// interface userDB extends userCart {
+//   id: number;
+//   name: string;
+//   firstName: string;
+//   email: string;
+//   age?: number;
+//   Bio?: string;
+//   avatarURL?: string;
+//   rating?: number;
+//   pricePerOneMessage?: number;
+//   location?: string;
+//   profession?: string;
+
+//   hor?: number;
+//   gender?: string;
+//   roles?: string;
+//   createdAt?: string;
+
+//   inbox?: string;
+//   send?: string;
+//   draft?: string;
+// }
+
+export type { userCart };

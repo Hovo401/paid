@@ -1,37 +1,37 @@
-import { useState } from "react";
-import Footer from "../components/footer/Footer.component";
-import Header from "../components/header/Header.component";
-import { NavLink } from "react-router-dom";
+import { useState } from 'react';
+import Footer from '../components/footer/Footer.component';
+import Header from '../components/header/Header.component';
+import { NavLink, useNavigate } from 'react-router-dom';
+import api from '../api/api';
 
 function Login() {
   const [formData, setFormData] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
   const [errors, setErrors] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
+  const navigate = useNavigate();
 
   const validateForm = () => {
     let isValid = true;
-    const newErrors = { email: "", password: "" };
-
+    const newErrors = { email: '', password: '' };
 
     if (!formData.email) {
-      newErrors.email = "Email is required";
+      newErrors.email = 'Email is required';
       isValid = false;
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = "Invalid email format";
+      newErrors.email = 'Invalid email format';
       isValid = false;
     }
 
-
     if (!formData.password) {
-      newErrors.password = "Password is required";
+      newErrors.password = 'Password is required';
       isValid = false;
-    } else if (formData.password.length < 6) {
-      newErrors.password = "Password must be at least 6 characters";
+    } else if (formData.password.length < 2) {
+      newErrors.password = 'Password must be at least 6 characters';
       isValid = false;
     }
 
@@ -42,7 +42,23 @@ function Login() {
   const handleSubmit = (e: any) => {
     e.preventDefault();
     if (validateForm()) {
-      console.log("Form submitted:", formData);
+      const fetch = async () => {
+        try {
+          const res = await api.post('/auth/login', {
+            email: formData.email,
+            password: formData.password,
+          });
+          if (res.status === 200) {
+            localStorage.setItem('token', res.data.access_token);
+            navigate(`/accaunt`);
+          } else {
+            alert('code : ' + res.status);
+          }
+        } catch (e:any) {
+          alert('code : ' + e?.status && '');
+        }
+      };
+      fetch();
     }
   };
 
@@ -54,7 +70,7 @@ function Login() {
     }));
     setErrors((prev) => ({
       ...prev,
-      [name]: "",
+      [name]: '',
     }));
   };
 
@@ -132,7 +148,7 @@ function Login() {
               to="/Registration"
               className={({ isActive }) =>
                 `text-text_c_0-light dark:text-text_c_0-dark text-base  ${
-                  isActive ? "underline" : ""
+                  isActive ? 'underline' : ''
                 }`
               }
             >

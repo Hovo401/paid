@@ -1,4 +1,14 @@
-function Send({setCategoriesSitebarOpen, CategoriesSitebarOpen}:any) {
+import type { userDB } from "../../../Types/api.types";
+
+function Send({
+  setCategoriesSitebarOpen,
+  CategoriesSitebarOpen,
+  userDB,
+}: {
+  userDB: userDB | null;
+  setCategoriesSitebarOpen: any;
+  CategoriesSitebarOpen: any;
+}) {
     return (
       <>
         <div className="mt-20 flex  justify-between content-center">
@@ -25,6 +35,26 @@ function Send({setCategoriesSitebarOpen, CategoriesSitebarOpen}:any) {
             </button>
           </div>
         </div>
+
+
+        <div>
+        {userDB &&
+          userDB.send &&
+          userDB.send.map((item) => {
+            return (
+              <>
+                <div className="bg_c_1 w-[50%] p-2.5 rounded-2xl my-2">
+                  <p>
+                    {item.in.name} {item.in.id}
+                  </p>
+                  <p>{item.in.email}</p>
+                  <p>{item.subject}</p>
+                  <p>{item.message}</p>
+                </div>
+              </>
+            );
+          })}
+      </div>
   
         <div className="w-full flex  mb-5 mt-5 ">
           <div>

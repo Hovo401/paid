@@ -1,27 +1,30 @@
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
-import Footer from "../components/footer/Footer.component";
-import Header from "../components/header/Header.component";
-import { NavLink } from "react-router-dom";
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
+import Footer from '../components/footer/Footer.component';
+import Header from '../components/header/Header.component';
+import { NavLink, useNavigate } from 'react-router-dom';
+import api from '../api/api';
 
 const schema = z.object({
-  name: z.string().nonempty("Name is required"),
-  email: z.string().email("Invalid email format").nonempty("Email is required"),
-  phoneNumber: z.string().nonempty("Phone number is required"),
-  region: z.string().nonempty("Region is required"),
-  socialProofs: z.string().nonempty("Social proofs are required"),
-  yourHandle: z.string().nonempty("Handle is required"),
-  followers: z.string().nonempty("Followers count is required"),
-  profileStatus: z.enum(["public", "incognito"], {
-    errorMap: () => ({ message: "Please select a profile status" }),
+  name: z.string().nonempty('Name is required'),
+  email: z.string().email('Invalid email format').nonempty('Email is required'),
+  phoneNumber: z.string().nonempty('Phone number is required'),
+  region: z.string().nonempty('Region is required'),
+  socialProofs: z.string().nonempty('Social proofs are required'),
+  yourHandle: z.string().nonempty('Handle is required'),
+  password: z.string().nonempty('password is required'),
+  followers: z.string().nonempty('Followers count is required'),
+  profileStatus: z.enum(['public', 'incognito'], {
+    errorMap: () => ({ message: 'Please select a profile status' }),
   }),
-  gender: z.enum(["female", "male", "custom"], {
-    errorMap: () => ({ message: "Please select a gender" }),
+  gender: z.enum(['female', 'male', 'custom'], {
+    errorMap: () => ({ message: 'Please select a gender' }),
   }),
 });
 
 function Registration() {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -31,7 +34,27 @@ function Registration() {
   });
 
   const onSubmit = (data: any) => {
-    console.log("Form submitted:", data);
+    const fetch = async () => {
+      const login = await api.post<any>('/auth/regoister', {
+        name: data.name,
+        email: data.email,
+        password: data.password,
+        location: data.region,
+        avatarURL: data.followers,
+        profession: data.socialProofs,
+        Bio: data.yourHandle,
+        hor:3,
+        rating:5,
+        age:20,
+        pricePerOneMessage: 19.99
+      });
+      if (login.status === 201) {
+        localStorage.setItem('token', login.data.access_token);
+        navigate(`/accaunt`);
+      }
+
+    };
+    fetch();
   };
 
   return (
@@ -53,7 +76,7 @@ function Registration() {
                 Name*
               </label>
               <input
-                {...register("name")}
+                {...register('name')}
                 id="name"
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg_c_2 t_c_1000 dark:border-gray-600 dark:text-white"
                 placeholder="Name"
@@ -72,7 +95,7 @@ function Registration() {
                 Email*
               </label>
               <input
-                {...register("email")}
+                {...register('email')}
                 type="email"
                 id="email"
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg_c_2 t_c_1000 dark:border-gray-600 dark:text-white"
@@ -89,10 +112,29 @@ function Registration() {
                 htmlFor="phoneNumber"
                 className="block text-sm font-medium mb-1"
               >
+                password*
+              </label>
+              <input
+                {...register('password')}
+                id="password"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg_c_2 t_c_1000 dark:border-gray-600 dark:text-white"
+                placeholder="password"
+              />
+              {errors.password && (
+                <p className="mt-1 text-sm text-red-500">
+                  {errors.password.message}
+                </p>
+              )}
+            </div>
+            <div>
+              <label
+                htmlFor="phoneNumber"
+                className="block text-sm font-medium mb-1"
+              >
                 Phone Number*
               </label>
               <input
-                {...register("phoneNumber")}
+                {...register('phoneNumber')}
                 id="phoneNumber"
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg_c_2 t_c_1000 dark:border-gray-600 dark:text-white"
                 placeholder="Phone Number"
@@ -111,7 +153,7 @@ function Registration() {
                 Region*
               </label>
               <input
-                {...register("region")}
+                {...register('region')}
                 id="region"
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg_c_2 t_c_1000 dark:border-gray-600 dark:text-white"
                 placeholder="Region"
@@ -130,8 +172,8 @@ function Registration() {
                 Social Proofs*
               </label>
               <input
-                {...register("socialProofs")}
-                id="socialProofs"
+                {...register('socialProofs')}
+                id="profession"
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg_c_2 t_c_1000 dark:border-gray-600 dark:text-white"
                 placeholder="Social Proofs"
               />
@@ -146,10 +188,10 @@ function Registration() {
                 htmlFor="yourHandle"
                 className="block text-sm font-medium  mb-1"
               >
-                Your Handle*
+                bio*
               </label>
               <input
-                {...register("yourHandle")}
+                {...register('yourHandle')}
                 id="yourHandle"
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg_c_2 t_c_1000 dark:border-gray-600 dark:text-white"
                 placeholder="Your Handle"
@@ -165,10 +207,11 @@ function Registration() {
                 htmlFor="followers"
                 className="block text-sm font-medium  mb-1"
               >
-                How many followers do you have?*
+                {/* How many followers do you have?* */}
+                avatarURL
               </label>
               <input
-                {...register("followers")}
+                {...register('followers')}
                 id="followers"
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg_c_2 t_c_1000 dark:border-gray-600 dark:text-white"
                 placeholder="How many followers do you have?"
@@ -179,6 +222,7 @@ function Registration() {
                 </p>
               )}
             </div>
+
             <div>
               <label className="block text-sm font-medium  mb-1">
                 Your profile status*
@@ -186,7 +230,7 @@ function Registration() {
               <div className="flex space-x-4">
                 <label className="flex items-center">
                   <input
-                    {...register("profileStatus")}
+                    {...register('profileStatus')}
                     type="radio"
                     value="public"
                     className="mr-2"
@@ -195,7 +239,7 @@ function Registration() {
                 </label>
                 <label className="flex items-center">
                   <input
-                    {...register("profileStatus")}
+                    {...register('profileStatus')}
                     type="radio"
                     value="incognito"
                     className="mr-2"
@@ -214,7 +258,7 @@ function Registration() {
               <div className="flex space-x-4">
                 <label className="flex items-center">
                   <input
-                    {...register("gender")}
+                    {...register('gender')}
                     type="radio"
                     value="female"
                     className="mr-2"
@@ -223,7 +267,7 @@ function Registration() {
                 </label>
                 <label className="flex items-center">
                   <input
-                    {...register("gender")}
+                    {...register('gender')}
                     type="radio"
                     value="male"
                     className="mr-2"
@@ -232,7 +276,7 @@ function Registration() {
                 </label>
                 <label className="flex items-center">
                   <input
-                    {...register("gender")}
+                    {...register('gender')}
                     type="radio"
                     value="custom"
                     className="mr-2"
@@ -258,7 +302,7 @@ function Registration() {
               to="/LogIn"
               className={({ isActive }) =>
                 `text-text_c_0-light dark:text-text_c_0-dark text-base  ${
-                  isActive ? "underline" : ""
+                  isActive ? 'underline' : ''
                 }`
               }
             >

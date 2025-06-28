@@ -1,4 +1,14 @@
-function AccauntComponent({setCategoriesSitebarOpen, CategoriesSitebarOpen}:any) {
+import type { userDB } from '../../../Types/api.types';
+
+function AccauntComponent({
+  setCategoriesSitebarOpen,
+  CategoriesSitebarOpen,
+  userDB,
+}: {
+  userDB: userDB | null;
+  setCategoriesSitebarOpen: any;
+  CategoriesSitebarOpen: any;
+}) {
   return (
     <>
       <div className="mt-20 flex  justify-between content-center">
@@ -18,11 +28,35 @@ function AccauntComponent({setCategoriesSitebarOpen, CategoriesSitebarOpen}:any)
           <button
             onClick={() => setCategoriesSitebarOpen(!CategoriesSitebarOpen)}
             className={` w-[120px] py-1 cursor-pointer bg_c_2 rounded-lg outline-none select-none md:hidden  font-bold ${
-              CategoriesSitebarOpen ? "underline" : ""
+              CategoriesSitebarOpen ? 'underline' : ''
             }`}
           >
             Filters
           </button>
+        </div>
+      </div>
+      <h2>id: {userDB?.id}</h2>
+
+      <div className=" mx-auto ">
+        <div className="w-[270px]  mr-2  rounded-3xl p-2.5 bg_c_1 mb-5">
+          <div className="min-h-[180px]">
+            <img
+              src={userDB?.avatarURL}
+              className="w-full h-full object-cover rounded-2xl"
+              alt=""
+            />
+          </div>
+          <div>
+            <p className="text-[20px]">
+              {userDB?.name} {userDB?.firstName}
+            </p>
+            <p className="text-gray-400"> {userDB?.profession}</p>
+            <p>{userDB?.location}</p>
+            <p>Email: {userDB?.email}</p>
+            <p>hor : {userDB?.hor}</p>
+            <p>rating : {userDB?.rating}</p>
+            <p>age : {userDB?.age}</p>
+          </div>
         </div>
       </div>
 

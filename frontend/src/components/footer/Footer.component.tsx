@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react';
 function FooterColumn() {
   return (
     <div className="text-left w-[135px]  p-[5px]">
@@ -11,13 +11,15 @@ function FooterColumn() {
 }
 
 function Footer() {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(
+    Boolean(localStorage.getItem('darkMode')),
+  );
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
-    localStorage.setItem("darkMode", (+darkMode + 0).toString());
+    localStorage.setItem('darkMode', (+darkMode + 0).toString());
 
-    document.documentElement.classList.toggle("dark", !darkMode);
+    document.documentElement.classList.toggle('dark', !darkMode);
   };
 
   return (
