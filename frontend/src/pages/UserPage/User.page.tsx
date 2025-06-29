@@ -84,7 +84,7 @@ function UserPage() {
   useEffect(() => {
     const fetch = async () => {
       const user_ = await api.get<userDB[]>(`/users`);
-      setUser(user_.data[id - 2]);
+      setUser(user_.data[id - 1]);
     };
     fetch();
   }, [id]);

@@ -1,8 +1,8 @@
-import { NavLink } from "react-router-dom";
-import Menu from "./menu/Menu.component";
-import { useState } from "react";
+import { NavLink } from 'react-router-dom';
+import Menu from './menu/Menu.component';
+import { useState } from 'react';
 
-function Header({ mode = "standart" }: { mode?: "standart" | "sitebar" }) {
+function Header({ mode = 'standart' }: { mode?: 'standart' | 'sitebar' }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
@@ -12,16 +12,16 @@ function Header({ mode = "standart" }: { mode?: "standart" | "sitebar" }) {
           <div
             className={` absolute h-[55px] w-[200px] left-0 top-0 -z-10 border-0 transition-[background-color] duration-1000
               ${
-                mode == "sitebar"
-                  ? "md:bg-bg_c_1-light dark:md:bg-bg_c_1-dark"
-                  : " "
+                mode == 'sitebar'
+                  ? 'md:bg-bg_c_1-light dark:md:bg-bg_c_1-dark'
+                  : ' '
               } `}
           ></div>
           <NavLink
             to="/"
             className={({ isActive }) =>
               `text-text_c_0-light dark:text-text_c_0-dark text-[18px] sm:text-[24px] font-bold ${
-                isActive ? "underline" : ""
+                isActive ? 'underline' : ''
               } `
             }
           >
@@ -32,7 +32,7 @@ function Header({ mode = "standart" }: { mode?: "standart" | "sitebar" }) {
               to="/Categories"
               className={({ isActive }) =>
                 `text-text_c_0-light dark:text-text_c_0-dark text-base hidden lg:block ${
-                  isActive ? "underline" : ""
+                  isActive ? 'underline' : ''
                 }`
               }
             >
@@ -42,7 +42,7 @@ function Header({ mode = "standart" }: { mode?: "standart" | "sitebar" }) {
               to="/about"
               className={({ isActive }) =>
                 `text-text_c_0-light dark:text-text_c_0-dark text-base hidden lg:block ${
-                  isActive ? "underline" : ""
+                  isActive ? 'underline' : ''
                 }`
               }
             >
@@ -52,7 +52,7 @@ function Header({ mode = "standart" }: { mode?: "standart" | "sitebar" }) {
               to="/HowItWorks"
               className={({ isActive }) =>
                 `text-text_c_0-light dark:text-text_c_0-dark text-base hidden lg:block ${
-                  isActive ? "underline" : ""
+                  isActive ? 'underline' : ''
                 }`
               }
             >
@@ -62,7 +62,7 @@ function Header({ mode = "standart" }: { mode?: "standart" | "sitebar" }) {
               to="/Registration"
               className={({ isActive }) =>
                 `text-text_c_0-light dark:text-text_c_0-dark text-base hidden lg:block ${
-                  isActive ? "underline" : ""
+                  isActive ? 'underline' : ''
                 }`
               }
             >
@@ -104,7 +104,7 @@ function Header({ mode = "standart" }: { mode?: "standart" | "sitebar" }) {
             to="/LogIn"
             className={({ isActive }) =>
               `text-[#A3AED0] hidden lg:block text-sm ${
-                isActive ? "underline" : ""
+                isActive ? 'underline' : ''
               }`
             }
           >
@@ -114,10 +114,27 @@ function Header({ mode = "standart" }: { mode?: "standart" | "sitebar" }) {
           </NavLink>
           <button
             type="submit"
-            className="w-[28px] h-[28px] lg:hidden cursor-pointer "
+            className="w-[28px] select-none h-[28px] lg:hidden cursor-pointer flex flex-col justify-center items-center space-y-1.5 hover:scale-110 transition-transform duration-200 "
             onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle menu"
           >
-            <img src="menu.svg" className="w-[28px] h-[28px]" />
+            <span
+              className={`w-6 h-0.5 bg-text_c_0-light dark:bg-text_c_0-dark transition-all duration-400 ease-[cubic-bezier(0.68,-0.55,0.265,1.55)] ${
+                menuOpen ? 'rotate-45 translate-y-2 scale-x-110' : 'scale-x-100'
+              }`}
+            ></span>
+            <span
+              className={`w-6 h-0.5 bg-text_c_0-light dark:bg-text_c_0-dark transition-all duration-300 ease-[cubic-bezier(0.68,-0.55,0.265,1.55)] delay-100 ${
+                menuOpen ? 'scale-x-0' : 'scale-x-100'
+              }`}
+            ></span>
+            <span
+              className={`w-6 h-0.5 bg-text_c_0-light dark:bg-text_c_0-dark transition-all duration-400 ease-[cubic-bezier(0.68,-0.55,0.265,1.55)] delay-50 ${
+                menuOpen
+                  ? '-rotate-45 -translate-y-2 scale-x-110'
+                  : 'scale-x-100'
+              }`}
+            ></span>
           </button>
         </div>
       </div>

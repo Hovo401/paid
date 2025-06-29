@@ -23,6 +23,11 @@ function MainAccaunt() {
   const [activePage, setActivePage] = useState('Accaunt' as accauntPages);
   const [userDB, setUserDB] = useState(null as null | userDB);
 
+  function openAcatuntPages(accauntPage: accauntPages) {
+    setActivePage(accauntPage);
+    setCategoriesSitebarOpen(false);
+  }
+
   useEffect(() => {
     const fetch = async () => {
       const res = await api.get('/auth/profile');
@@ -40,7 +45,8 @@ function MainAccaunt() {
     <>
       <Header mode="sitebar" />
 
-      <div className="max-w-full min-h-[1100px]  flex-grow flex  relative">
+    <div className='flex-grow'>
+      <div className="max-w-full mb-8   flex  relative">
         <div
           className={`fixed top-[52px] inset-0 h-[200%]   transform duration-1000   md:hidden 
               ${
@@ -51,7 +57,7 @@ function MainAccaunt() {
           onClick={() => setCategoriesSitebarOpen(false)}
         />
         <aside
-          className={`absolute md:static w-[200px] pb-5 min-h-full  flex-none pl-[30px] pt-2 text_c_0 bg_c_1 transition-transform duration-300 mb-8 rounded-br-2xl z-20
+          className={`absolute md:static w-[200px] pb-5 min-h-full  flex-none pl-[30px] pt-2 text_c_0 bg_c_1 transition duration-300 mb-2.5 rounded-br-2xl z-20
             ${
               CategoriesSitebarOpen
                 ? 'translate-x-0'
@@ -62,42 +68,43 @@ function MainAccaunt() {
         >
           <div className="mt-15 select-none">
             <div
-              onClick={() => setActivePage('Accaunt')}
+              onClick={() => openAcatuntPages('Accaunt')}
               className="flex items-center gap-3 my-4 cursor-pointer hover:underline"
             >
               <img src="personIcon.svg" className="w-[18px] h-[18px]" alt="" />
               <p>Accaunt</p>
             </div>
             <div
-              onClick={() => setActivePage('Inbox')}
+              onClick={() => openAcatuntPages('Inbox')}
               className="flex items-center gap-3 my-4 cursor-pointer hover:underline"
             >
               <img src="inbox.svg" className="w-[18px] h-[18px]" alt="" />
               <p>Inbox</p>
             </div>
             <div
-              onClick={() => setActivePage('Send')}
+              onClick={() =>openAcatuntPages('Send')
+              }
               className="flex items-center gap-3 my-4 cursor-pointer hover:underline"
             >
               <img src="send.svg" className="w-[18px] h-[18px]" alt="" />
               <p>Send</p>
             </div>
             <div
-              onClick={() => setActivePage('Draft')}
+              onClick={() => openAcatuntPages('Draft')}
               className="flex items-center gap-3 my-4 cursor-pointer hover:underline"
             >
               <img src="draft.svg" className="w-[18px] h-[18px]" alt="" />
               <p>Draft</p>
             </div>
             <div
-              onClick={() => setActivePage('Finance')}
+              onClick={() => openAcatuntPages('Finance')}
               className="flex items-center gap-3 my-4 cursor-pointer hover:underline"
             >
               <img src="finance.svg" className="w-[18px] h-[18px]" alt="" />
               <p>Finance</p>
             </div>
             <div
-              onClick={() => setActivePage('Settings')}
+              onClick={() => openAcatuntPages('Settings')}
               className="flex items-center gap-3 my-4 cursor-pointer hover:underline"
             >
               <img src="personIcon.svg" className="w-[18px] h-[18px]" alt="" />
@@ -146,6 +153,7 @@ function MainAccaunt() {
             ''
           )}
         </main>
+      </div>
       </div>
 
       <Footer />

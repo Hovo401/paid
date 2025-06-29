@@ -7,9 +7,11 @@ import { jwtConstants } from './constants';
 import { AuthGuard } from '../guard/auth.guard';
 import { APP_GUARD } from '@nestjs/core';
 import { RolesGuard } from 'src/guard/roles.guard';
+import { MailService } from '../mail/mail.service';
 
 @Module({
-  imports: [UsersModule,
+  imports: [
+    UsersModule,
     JwtModule.register({
       global: true,
       secret: jwtConstants.secret,
@@ -17,13 +19,18 @@ import { RolesGuard } from 'src/guard/roles.guard';
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService, {
-    provide: APP_GUARD,
-    useClass: AuthGuard,
-  },{
-    provide: APP_GUARD,
-    useClass: RolesGuard, 
-  },],
-  exports: [AuthService]
+  providers: [
+    AuthService,
+    {
+      provide: APP_GUARD,
+      useClass: AuthGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
+    },
+    MailService,
+  ],
+  exports: [AuthService],
 })
 export class AuthModule {}

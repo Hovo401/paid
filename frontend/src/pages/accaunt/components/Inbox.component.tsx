@@ -12,18 +12,12 @@ function Inbox({
   return (
     <>
       <div className="mt-20 flex  justify-between content-center">
-        <h1 className="text_c_0 text-2xl font-bold">Inbox</h1>
+        <h1 className="text_c_0 text-2xl font-bold">
+          Inbox ({userDB?.inbox?.length ?? 0})
+        </h1>
       </div>
 
-      <div className="w-full flex justify-between content-center flex-wrap mb-5 mt-5 ">
-        <div>
-          <button
-            type="submit"
-            className="w-[120px] py-1 cursor-pointer bg_c_2 rounded-lg outline-none select-none   font-bold"
-          >
-            Send
-          </button>
-        </div>
+      <div className="w-full flex justify-end content-center flex-wrap mb-5 mt-5 ">
         <div>
           <button
             onClick={() => setCategoriesSitebarOpen(!CategoriesSitebarOpen)}
@@ -36,44 +30,35 @@ function Inbox({
         </div>
       </div>
 
-      <div>
-        {userDB &&
-          userDB.inbox &&
-          userDB.inbox
-            .slice()
-            .reverse()
-            .map((item) => {
-              return (
-                <>
-                  <div className="bg_c_1 w-[50%] p-2.5 rounded-2xl my-2">
-                    <p>
-                      {item.in.name} {item.in.id}
-                    </p>
-                    <p>{item.in.email}</p>
-                    <p>{item.subject}</p>
-                    <p>{item.message}</p>
-                  </div>
-                </>
-              );
-            })}
-      </div>
-
-      <div className="w-full flex  mb-5 mt-5 ">
-        <div>
-          <button
-            type="submit"
-            className=" py-1 px-2 cursor-pointer main_color text-white rounded-lg  outline-none select-none"
-          >
-            Send
-          </button>
-        </div>
-        <div className="w-full flex justify-center ">
-          <button
-            type="submit"
-            className="w-[150px] py-1 px-2 cursor-pointer  bg_c_2 rounded-lg  outline-none select-none"
-          >
-            More
-          </button>
+      <div className="w-full ">
+        <div className=" w-full flex p-2.5  flex-wrap flex-row justify-center gap-6">
+          <div className=" flex-1 bg_c_1 t_c_1000 rounded-3xl p-2.5 min-w-[320px]  w-[80%] max-w-[600px] ">
+            <div>
+              {userDB &&
+                userDB.inbox &&
+                userDB.inbox
+                  .slice()
+                  .reverse()
+                  .map((item) => {
+                    return (
+                      <>
+                        <div className="  p-2.5 rounded-2xl my-1.5">
+                          <p>
+                           Name: {item.in.name} id: {item.in.id}
+                          </p>
+                          <p>Email: {item.in.email}</p>
+                          <p>Subject: {item.subject}</p>
+                          <p>Message: {item.message}</p>
+                        </div>
+                        <hr className="text-gray-300" />
+                      </>
+                    );
+                  })}
+            </div>
+          </div>
+          <div className="flex-1 bg_c_1 t_c_1000 rounded-3xl min-w-[320px] w-[80%] p-2.5 max-w-[600px]">
+            item2
+          </div>
         </div>
       </div>
     </>

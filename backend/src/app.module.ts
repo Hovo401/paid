@@ -4,9 +4,19 @@ import { UserModule } from './user/user.module';
 // import { UsersModule } from './users/users.module';
 // import { SessionModule } from './session/session.module';
 import { MessageModule } from './message/message.module';
+import { ConfigModule } from '@nestjs/config';
+
 
 @Module({
-  imports: [AuthModule, UserModule, MessageModule],
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true, 
+      envFilePath: ['.env', '.env.production.local'], 
+    }),
+    AuthModule,
+    UserModule,
+    MessageModule,
+  ],
   controllers: [],
   providers: [],
 })

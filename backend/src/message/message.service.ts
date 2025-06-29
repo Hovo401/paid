@@ -34,7 +34,7 @@ export class MessageService {
     };
 
     send.push(email);
-    await this.prisma.user.update({
+    const from = await this.prisma.user.update({
       where: { id: seningUserId },
       data: {
         send: JSON.stringify(send),
@@ -42,12 +42,13 @@ export class MessageService {
     });
 
     inbox.push(email);
-    return await this.prisma.user.update({
+    return {to:await this.prisma.user.update({
       where: { id: body.id },
       data: {
         inbox: JSON.stringify(inbox),
       },
-    });
+    }),
+    from};
   }
 
   async findAll(seningUserId: number) {
