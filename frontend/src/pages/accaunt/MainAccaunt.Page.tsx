@@ -57,7 +57,7 @@ function MainAccaunt() {
           onClick={() => setCategoriesSitebarOpen(false)}
         />
         <aside
-          className={`absolute md:static w-[200px] pb-5 min-h-full  flex-none pl-[30px] pt-2 text_c_0 bg_c_1 transition duration-300 mb-2.5 rounded-br-2xl z-20
+          className={`absolute md:static w-[200px] pb-5 min-h-full  flex-none pl-[30px] pt-2 text_c_0 bg_c_1 transition duration-300 rounded-br-3xl z-20
             ${
               CategoriesSitebarOpen
                 ? 'translate-x-0'

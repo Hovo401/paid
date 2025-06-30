@@ -26,6 +26,9 @@ body {
 .bg_c_2 {
   @apply bg-bg_c_2-light dark:bg-bg_c_2-dark;
 }
+.bg_c_3{
+  @apply bg-bg_c_3-light dark:bg-bg_c_3-dark;
+}
 .t_c_1000 {
   @apply transition-[background-color] duration-1000;
 }

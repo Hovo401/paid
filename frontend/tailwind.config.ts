@@ -17,6 +17,10 @@ const config: Config = {
           light: "#fff",
           dark: "#364153",
         },
+        bg_c_3: {
+          light: "#F4F7FE",
+          dark: "#364153",
+        },
         text_c_0: {
           light: "#11047A",
           dark: "#FFFFFF",

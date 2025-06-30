@@ -31,9 +31,25 @@ function Send({
       </div>
 
       <div className="w-full ">
-        <div className=" w-full flex p-2.5  flex-wrap flex-row justify-center gap-6">
-          <div className=" flex-1 bg_c_1 t_c_1000 rounded-3xl p-2.5 min-w-[320px]  w-[80%] max-w-[600px] ">
-            <div>
+      <div className=" w-full flex   flex-wrap flex-row justify-center gap-6">
+          <div className=" flex-1 bg_c_1 t_c_1000 rounded-3xl p-5 min-w-[320px]  w-[80%] max-w-[600px] ">
+          <div className="relative flex items-center">
+            <input
+              type="search"
+              placeholder="Search"
+              className="pl-10 pr-2 py-1.5 h-[30px] bg_c_3 t_c_1000 rounded-ful text_c_0 w-48 rounded-2xl  text-sm placeholder-[#9CA3AF] focus:outline-none"
+              aria-label="Search"
+            />
+            <button
+              type="submit"
+              className="absolute left-3 top-1/2 transform -translate-y-1/2 bg-transparent border-none cursor-pointer p-0"
+              aria-label="Submit search"
+            >
+              <img src="search.svg" alt="Search icon" className="w-4 h-4" />
+            </button>
+          </div>
+            
+            <div className=" border-b border-gray-300 mt-2.5 ">
               {userDB &&
                 userDB.send &&
                 userDB.send
@@ -42,15 +58,14 @@ function Send({
                   .map((item) => {
                     return (
                       <>
-                        <div className="  p-2.5 rounded-2xl my-1.5">
+                        <div className=" t_c_1000 border-t py-2.5 border-gray-300   ">
                           <p>
-                            Name: {item.in.name} id: {item.in.id}
+                           Name: {item.in.name} id: {item.in.id}
                           </p>
                           <p>Email: {item.in.email}</p>
                           <p>Subject: {item.subject}</p>
                           <p>Message: {item.message}</p>
                         </div>
-                        <hr className="text-gray-300" />
                       </>
                     );
                   })}
