@@ -16,7 +16,7 @@ import MainAccaunt from './pages/accaunt/MainAccaunt.Page';
 function App() {
   useEffect(() => {
     const darkMode_ = localStorage.getItem('darkMode') ?? 0;
-    document.documentElement.classList.toggle('dark', !+darkMode_);
+    document.documentElement.classList.toggle('dark', !!+darkMode_);
   }, []);
 
   return (
@@ -26,14 +26,13 @@ function App() {
           <Route path="/" element={<Navigate to="/home" replace />} />
           <Route path="/home" element={<Home />} />
           <Route path="/about" element={<About />} />
-          <Route path="/Categories" element={<Categories />} />
+          <Route path="/cc" element={<Categories />} />
           <Route path="/HowItWorks" element={<HowItWorks />} />
           <Route path="/RegInfluencer" element={<RegInfluencer />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/Registration" element={<Registration />} />
           <Route path="/UserPage" element={<UserPage />} />
-          <Route path="/accaunt" element={<MainAccaunt />} />
-
+          <Route path="/accaunt/*" element={<MainAccaunt />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

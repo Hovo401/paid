@@ -6,7 +6,7 @@ function Header({ mode = 'standart' }: { mode?: 'standart' | 'sitebar' }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="pt-[10px] h-[56px] pl-[30px] pr-[10px] fixed w-[100%] top-0 pb-[10px]  z-100  border-0  bg_c_0 t_c_1000 transition-[background-color] duration-1000">
+    <header className="pt-[10px] h-[56px] pl-[10px] pr-[10px] fixed w-[100%] top-0 pb-[10px]  z-100  border-0  bg_c_0 t_c_1000 transition-[background-color] duration-1000">
       <div className="mx-auto flex justify-between items-center">
         <nav className={`flex items-center gap-6  `}>
           <div
@@ -20,24 +20,15 @@ function Header({ mode = 'standart' }: { mode?: 'standart' | 'sitebar' }) {
           <NavLink
             to="/"
             className={({ isActive }) =>
-              `text-text_c_0-light dark:text-text_c_0-dark text-[18px] sm:text-[24px] font-bold ${
+              `text-text_c_0-light flex h-[36px] items-center  gap-1.5 dark:text-text_c_0-dark text-[18px] sm:text-[24px] font-bold ${
                 isActive ? 'underline' : ''
               } `
             }
           >
-            Paid Email
+            <img src="logo.png" className='h-[40px] w-full' alt="" />
+            PRIMESS
           </NavLink>
           <div className="absolute left-[210px] flex items-center gap-6">
-            <NavLink
-              to="/Categories"
-              className={({ isActive }) =>
-                `text-text_c_0-light dark:text-text_c_0-dark text-base hidden lg:block ${
-                  isActive ? 'underline' : ''
-                }`
-              }
-            >
-              Categories
-            </NavLink>
             <NavLink
               to="/about"
               className={({ isActive }) =>
@@ -114,24 +105,24 @@ function Header({ mode = 'standart' }: { mode?: 'standart' | 'sitebar' }) {
           </NavLink>
           <button
             type="submit"
-            className="w-[28px] select-none h-[28px] lg:hidden cursor-pointer flex flex-col justify-center items-center space-y-1.5 hover:scale-110 transition-transform duration-200 "
+            className="w-[36px] select-none h-[36px] lg:hidden cursor-pointer flex flex-col justify-center items-center space-y-2 hover:scale-110 transition-transform duration-200 "
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle menu"
           >
             <span
-              className={`w-6 h-0.5 bg-text_c_0-light dark:bg-text_c_0-dark transition-all duration-400 ease-[cubic-bezier(0.68,-0.55,0.265,1.55)] ${
-                menuOpen ? 'rotate-45 translate-y-2 scale-x-110' : 'scale-x-100'
+              className={`w-[30px] h-[3px] bg-text_c_0-light dark:bg-text_c_0-dark transition-all duration-400 ease-[cubic-bezier(0.68,-0.55,0.265,1.55)] ${
+                menuOpen ? 'rotate-45 translate-y-[11px] scale-x-110' : 'scale-x-100'
               }`}
             ></span>
             <span
-              className={`w-6 h-0.5 bg-text_c_0-light dark:bg-text_c_0-dark transition-all duration-300 ease-[cubic-bezier(0.68,-0.55,0.265,1.55)] delay-100 ${
+              className={`w-[30px] h-[3px] bg-text_c_0-light dark:bg-text_c_0-dark transition-all duration-300 ease-[cubic-bezier(0.68,-0.55,0.265,1.55)] delay-100 ${
                 menuOpen ? 'scale-x-0' : 'scale-x-100'
               }`}
             ></span>
             <span
-              className={`w-6 h-0.5 bg-text_c_0-light dark:bg-text_c_0-dark transition-all duration-400 ease-[cubic-bezier(0.68,-0.55,0.265,1.55)] delay-50 ${
+              className={`w-[30px] h-[3px] bg-text_c_0-light dark:bg-text_c_0-dark transition-all duration-400 ease-[cubic-bezier(0.68,-0.55,0.265,1.55)] delay-50 ${
                 menuOpen
-                  ? '-rotate-45 -translate-y-2 scale-x-110'
+                  ? '-rotate-45 -translate-y-[11px] scale-x-110'
                   : 'scale-x-100'
               }`}
             ></span>

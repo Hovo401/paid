@@ -27,16 +27,7 @@ function Menu({ menuOpen }: { menuOpen: boolean }) {
         >
           <p>Log in</p>
         </NavLink>
-        <NavLink
-          to="/Categories"
-          className={({ isActive }) =>
-            `text-text_c_0-light dark:text-text_c_0-dark text-base  ${
-              isActive ? "underline" : ""
-            }`
-          }
-        >
-          Categories
-        </NavLink>
+        
         <NavLink
           to="/about"
           className={({ isActive }) =>

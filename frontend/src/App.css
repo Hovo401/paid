@@ -1,5 +1,5 @@
 @config "../tailwind.config.ts";
-@import "tailwindcss";
+@import 'tailwindcss';
 
 * {
   /* margin: 0; */
@@ -8,11 +8,13 @@
 }
 
 .dark body {
-  background-color: theme("colors.bg_c_0.dark");
+  background-color: theme('colors.bg_c_0.dark');
 }
 body {
-  background-color: theme("colors.bg_c_0.light");
+  background-color: theme('colors.bg_c_0.light');
   transition: background-color 1s;
+
+  font-family: 'Inter', sans-serif; 
 }
 
 .bg_c_0 {
@@ -26,7 +28,7 @@ body {
 .bg_c_2 {
   @apply bg-bg_c_2-light dark:bg-bg_c_2-dark;
 }
-.bg_c_3{
+.bg_c_3 {
   @apply bg-bg_c_3-light dark:bg-bg_c_3-dark;
 }
 .t_c_1000 {
