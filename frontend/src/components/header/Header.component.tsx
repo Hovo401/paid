@@ -1,16 +1,34 @@
 import { NavLink } from 'react-router-dom';
 import Menu from './menu/Menu.component';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import LanguageSwitcher from '../LanguageSwitcher';
+import { useTranslation } from 'react-i18next';
+import { AuthContext } from '../../context/AuthContext';
 
 function Header({ mode = 'standart' }: { mode?: 'standart' | 'sitebar' }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { t } = useTranslation();
+
+  const authContext = useContext(AuthContext);
+  if (!authContext) {
+    throw new Error('Home must be used within an AuthProvider');
+  }
+  const { isLoggedIn, setIsLoggedIn } = authContext;
+
+  const handleLogout = async () => {
+    try {
+      setIsLoggedIn(false);
+    } catch (error) {
+      console.error('Ошибка выхода:', error);
+    }
+  };
 
   return (
-    <header className="pt-[10px] h-[56px] pl-[10px] pr-[10px] fixed w-[100%] top-0 pb-[10px]  z-100  border-0  bg_c_0 t_c_1000 transition-[background-color] duration-1000">
-      <div className="mx-auto flex justify-between items-center">
+    <header className="pt-[10px] shadow-md dark:shadow-bg_c_1-dark h-[56px]  pl-[10px] pr-[20px] fixed w-[100%] top-0 pb-[10px]  z-100  border-0  bg_c_0 t_c_1000 transition-[background-color] duration-1000">
+      <div className="mx-auto flex  justify-between items-center">
         <nav className={`flex items-center gap-6  `}>
           <div
-            className={` absolute h-[55px] w-[200px] left-0 top-0 -z-10 border-0 transition-[background-color] duration-1000
+            className={` absolute h-[56px] w-[200px] left-0 top-0 -z-10 border-0 transition-[background-color] duration-1000
               ${
                 mode == 'sitebar'
                   ? 'md:bg-bg_c_1-light dark:md:bg-bg_c_1-dark'
@@ -20,15 +38,15 @@ function Header({ mode = 'standart' }: { mode?: 'standart' | 'sitebar' }) {
           <NavLink
             to="/"
             className={({ isActive }) =>
-              `text-text_c_0-light flex h-[36px] items-center  gap-1.5 dark:text-text_c_0-dark text-[18px] sm:text-[24px] font-bold ${
+              `text-text_c_0-light flex h-[36px] items-center pl-5  gap-1.5 dark:text-text_c_0-dark text-[18px] sm:text-[24px] font-bold ${
                 isActive ? 'underline' : ''
               } `
             }
           >
-            <img src="logo.png" className='h-[40px] w-full' alt="" />
+            {/* <img src="logo.png" className='h-[40px] w-full' alt="" /> */}
             PRIMESS
           </NavLink>
-          <div className="absolute left-[210px] flex items-center gap-6">
+          <div className="absolute left-[210px]  flex items-center gap-6">
             <NavLink
               to="/about"
               className={({ isActive }) =>
@@ -37,7 +55,7 @@ function Header({ mode = 'standart' }: { mode?: 'standart' | 'sitebar' }) {
                 }`
               }
             >
-              About us
+              {t('pageName.about')}
             </NavLink>
             <NavLink
               to="/HowItWorks"
@@ -47,22 +65,12 @@ function Header({ mode = 'standart' }: { mode?: 'standart' | 'sitebar' }) {
                 }`
               }
             >
-              How it works
-            </NavLink>
-            <NavLink
-              to="/Registration"
-              className={({ isActive }) =>
-                `text-text_c_0-light dark:text-text_c_0-dark text-base hidden lg:block ${
-                  isActive ? 'underline' : ''
-                }`
-              }
-            >
-              Registration as a influencer
+              {t('pageName.Howitworks')}
             </NavLink>
           </div>
         </nav>
-        <div className="flex items-center gap-2">
-          <div className="relative flex items-center">
+        <div className="flex  items-center gap-5">
+          {/* <div className="relative flex items-center">
             <input
               type="search"
               placeholder="Search"
@@ -76,33 +84,70 @@ function Header({ mode = 'standart' }: { mode?: 'standart' | 'sitebar' }) {
             >
               <img src="search.svg" alt="Search icon" className="w-4 h-4" />
             </button>
-          </div>
-          <button
+          </div> */}
+
+          <LanguageSwitcher className="hidden lg:block" />
+          {/* <button
             type="submit"
             className="w-[28px] h-[28px] hidden lg:block cursor-pointer"
-          >
-            <img src="globe.svg" className="w-[28px] h-[28px]" />
-          </button>
-          <NavLink to="/accaunt">
+          {/* <NavLink to="/accaunt">
             <button
               type="submit"
               className="w-[28px] h-[28px] hidden lg:block cursor-pointer"
             >
               <img src="personIcon.svg" className="w-[23px] h-[23px]" />
             </button>
-          </NavLink>
-          <NavLink
-            to="/LogIn"
-            className={({ isActive }) =>
-              `text-[#A3AED0] hidden lg:block text-sm ${
-                isActive ? 'underline' : ''
-              }`
-            }
-          >
-            <div className="py-1.5 bg- h-[36px] w-[70px] rounded-full bg_c_2 t_c_1000 px-[15px]">
-              <p>Log in</p>
-            </div>
-          </NavLink>
+          </NavLink> */}
+
+          {isLoggedIn ? (
+            <>
+              <NavLink to="/accaunt">
+                <button
+                  type="submit"
+                  className="w-[28px] h-[28px] hidden lg:block cursor-pointer"
+                >
+                  <img src="personIcon.svg" className="w-[23px] h-[23px]" />
+                </button>
+              </NavLink>
+              <NavLink to="/login">
+                <button
+                  type="submit"
+                  onClick={handleLogout}
+                  className="h-[28px] text_c_0 hidden lg:block cursor-pointer"
+                >
+                  log out
+                </button>
+              </NavLink>
+            </>
+          ) : (
+            <>
+              <NavLink
+                to="/LogIn"
+                className={({ isActive }) =>
+                  `text_c_0 hidden lg:block text-sm ${
+                    isActive ? 'underline' : ''
+                  }`
+                }
+              >
+                <div className="py-1.5 bg- h-[36px] flex items-center rounded-full  bg_c_2 t_c_1000 px-[15px]">
+                  <p>{t('interface.Login')}</p>
+                </div>
+              </NavLink>
+              <NavLink
+                to="/Registration"
+                className={({ isActive }) =>
+                  `text-[#A3AED0] hidden  lg:block text-sm ${
+                    isActive ? 'underline' : ''
+                  }`
+                }
+              >
+                <div className="py-1.5 bg- h-[36px]  flex items-center rounded-full main_color text-white t_c_1000 px-[15px]">
+                  <p>{t('interface.SingUp')}</p>
+                </div>
+              </NavLink>
+            </>
+          )}
+
           <button
             type="submit"
             className="w-[36px] select-none h-[36px] lg:hidden cursor-pointer flex flex-col justify-center items-center space-y-2 hover:scale-110 transition-transform duration-200 "
@@ -111,7 +156,9 @@ function Header({ mode = 'standart' }: { mode?: 'standart' | 'sitebar' }) {
           >
             <span
               className={`w-[30px] h-[3px] bg-text_c_0-light dark:bg-text_c_0-dark transition-all duration-400 ease-[cubic-bezier(0.68,-0.55,0.265,1.55)] ${
-                menuOpen ? 'rotate-45 translate-y-[11px] scale-x-110' : 'scale-x-100'
+                menuOpen
+                  ? 'rotate-45 translate-y-[11px] scale-x-110'
+                  : 'scale-x-100'
               }`}
             ></span>
             <span

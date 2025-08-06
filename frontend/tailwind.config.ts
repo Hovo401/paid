@@ -6,20 +6,20 @@ const config: Config = {
     extend: {
       colors: {
         bg_c_0: {
-          light: "#F4F7FE",
+          light: "#E7E9F0",
           dark: "#00030B",
         },
         bg_c_1: {
           light: "#fff",
-          dark: "#0E111B",
+          dark: "#111521",
         },
         bg_c_2: {
           light: "#fff",
-          dark: "#364153",
+          dark: "#232B44",
         },
         bg_c_3: {
-          light: "#F4F7FE",
-          dark: "#364153",
+          light: "#DEE0E7",
+          dark: "#232B44",
         },
         text_c_0: {
           light: "#11047A",

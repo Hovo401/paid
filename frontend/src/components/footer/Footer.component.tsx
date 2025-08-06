@@ -19,7 +19,7 @@ function Footer() {
   };
 
   return (
-    <footer className=" text-text_c_0-light  w-[100%] dark:bg-[#8997B8] bg-[#ffffff] py-4    transition-[background-color] duration-1000">
+    <footer className=" text-text_c_0-light  w-[100%] dark:bg-[#8997B8] bg-[#ffffff] py-4 mt-10    transition-[background-color] duration-1000">
       <div className="container mx-auto  px-4 ">
         <div className="flex flex-col md:flex-row justify-between ">
           <div className="flex-shrink-0 mx-auto md:mx-0 w-[130px] mb-4 md:mb-0">

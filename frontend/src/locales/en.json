@@ -1,0 +1,77 @@
+{
+  "home": {
+    "title": "Who we are",
+    "description": "PriMess is a platform that allows audiences (followers, subscribers, fans) to connect with their desired people in prioritized way—while also creating social impact through charitable giving.",
+    "descriptionLong_1": "By using PriMess, high-profile individuals provide their followers or fans with a simple and preferable way to reach out to them.",
+    "descriptionLong_2": "Messages are filtered and processed based on the personal preferences and terms set during registration — including message fee, message type, response time, profile visibility, charity contribution rate, chosen charity organization, availability period, and more."
+  },
+  "aboutUs": {
+    "title": "About us",
+    "description": "PriMess is a startup that was created as a solution to a problem faced by its founder. On multiple occasions, the desire to connect with 'well-known' individuals went unanswered. This led to the idea that paying for a message could give it priority. The fact that the sender pays for the message might create a sense of importance for the recipient.",
+    "": ""
+  },
+  "HowItWorks": {
+    "title": "How it works",
+    "1t": "Register & Set Your Terms",
+    "1d": "Sign up on PriMess and customize your preferences: \n  - Minimum message fee \n - Response time \n - Charity organization and donation percentage (optional)You’ll receive a unique link to share.",
+    "2t": "Share Your Link",
+    "2d": "Announce your availability on social networks (Facebook, LinkedIn, X/Twitter, Instagram, YouTube, Reddit, etc.) so your followers know how to contact you through PriMess.",
+    "3t": "Receive Paid Messages",
+    "3d": "Start receiving messages from people who value your time and have paid the set fee for your attention."
+  },
+  "FAQ": [
+    {
+      "title": "Is my messaging safe on PriMess?",
+      "description": "Yes. Messages are encrypted, and PriMess uses secure coding and encryption technologies to protect your communication."
+    },
+    {
+      "title": "Why should I use PriMess if charging for messages might harm my reputation?",
+      "description": "Directing the message fee to charity can actually enhance your reputation by highlighting your commitment to social responsibility. It also makes you more accessible, while creating social value together with your audience."
+    },
+    {
+      "title": "Do I take on any obligations by registering on PriMess?",
+      "description": "No. You can use PriMess for as long as you like and stop participating at any time, with no commitments."
+    },
+    {
+      "title": "Can I choose not to respond to prioritized (paid) messages?",
+      "description": "Yes, you may ignore messages even if they meet your filters. However, the sender can request a refund, which will be deducted from your account. It may also negatively impact your profile's performance indicators (response rate, charity activity, message stats)."
+    },
+    {
+      "title": "If someone pays to message me, can they send anything they want — even spam?",
+      "description": "No. You control the message quality. By adjusting your filters (e.g. sender profile requirements, message length/type), you can reduce or prevent unwanted messages."
+    },
+    {
+      "title": "What if I get too much prioritized messages?",
+      "description": "You can reset a higher min. message fee which will automatically reduce received messages but it’s better to extend the response time which will make senders to pay more for urgent messages."
+    },
+    {
+      "title": "How do I know that I have a prioritized message?",
+      "description": "Besides email inbox PriMess will send you push notifications."
+    },
+    {
+      "title": "Should my profile be listed among other profiles in PriMess?",
+      "description": "No, you can choose incognito mode."
+    },
+    {
+      "title": "Can I change the charity rate in registration?",
+      "description": "Yes. We distribute the payments between you and charity organization periodically based on flexible charity rate."
+    },
+    {
+      "title": "Can I transfer the payments to my desired charity project?",
+      "description": "Absolutely. You can choose one from our charity list or suggest your charity project to us and will arrange everything."
+    }
+  ],
+  "interface": {
+    "notFound": "Page not found",
+    "goHome": "Go to Home",
+    "ShowMore": "Show more",
+    "ShowLess": "Show less",
+    "Login": "Login",
+    "SingUp": "Sing Up"
+  },
+  "pageName": {
+    "home": "home",
+    "about": "About us",
+    "Howitworks": "How it works"
+  }
+}

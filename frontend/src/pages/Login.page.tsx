@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import Footer from '../components/footer/Footer.component';
 import Header from '../components/header/Header.component';
 import { NavLink, useNavigate } from 'react-router-dom';
 import api from '../api/api';
+import { AuthContext } from '../context/AuthContext';
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -14,6 +15,12 @@ function Login() {
     password: '',
   });
   const navigate = useNavigate();
+
+  const authContext = useContext(AuthContext);
+  if (!authContext) {
+    throw new Error('Login must be used within an AuthProvider');
+  }
+  const { setIsLoggedIn } = authContext;
 
   const validateForm = () => {
     let isValid = true;
@@ -50,11 +57,12 @@ function Login() {
           });
           if (res.status === 200) {
             localStorage.setItem('token', res.data.access_token);
+            setIsLoggedIn(true);
             navigate(`/accaunt`);
           } else {
             alert('code : ' + res.status);
           }
-        } catch (e:any) {
+        } catch (e: any) {
           alert('code : ' + e?.status && '');
         }
       };

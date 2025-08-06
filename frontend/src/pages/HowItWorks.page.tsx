@@ -1,67 +1,47 @@
-import Footer from "../components/footer/Footer.component";
-import Header from "../components/header/Header.component";
+import { useTranslation } from 'react-i18next';
+import Footer from '../components/footer/Footer.component';
+import Header from '../components/header/Header.component';
+import FAQ from '../components/faq/FAQ.component';
 
 function HowItWorks() {
+  const { t } = useTranslation();
   return (
     <>
       <Header />
       <main className="w-[100%] flex-grow">
         <h1 className="text-center text-2xl mt-5 font-bold text-text_c_0-light dark:text-text_c_0-dark">
-          HowItWorks
+          {t('HowItWorks.title')}
         </h1>
 
-        <div className="w-[100%] flex justify-center gap-15 mt-10 mb-20 flex-wrap text-white  ">
-          <div className="bg-[#1E3A8A] p-8 w-[300px] h-[300px] rounded-2xl bg-gradient-to-br from-[#868CFF] to-[#4318FF]">
-            <img className="w-[60px] m-auto pb-5" src="Group.svg" alt="" />
-            <h3 className="text-center text-3xl mb-3">Registration</h3>
-            <p>
-              Register to set up your terms, i.e. fee, reply time, visability,
-              charity organization (optional) etc. and get a link.
-            </p>
+        <div
+          style={{ whiteSpace: 'pre-line' }}
+          className="w-[100%] flex justify-center gap-15 mt-10 mb-20 flex-wrap text-[15px] text-white  "
+        >
+          <div className="bg-[#1E3A8A]  shadow-2xl dark:shadow-bg_c_2-dark p-5 py-5 w-[300px]  max-h-[500px] rounded-2xl bg-gradient-to-br from-[#868CFF] to-[#4318FF]">
+            <img className="w-[60px] m-auto pb-2" src="Group.svg" alt="" />
+            <h3 className="text-center text-[20px] mb-3">
+              {t('HowItWorks.1t')}
+            </h3>
+            <p>{t('HowItWorks.1d')}</p>
           </div>
-          <div className="bg-[#1E3A8A] p-8 w-[300px] h-[300px] rounded-2xl bg-gradient-to-br from-[#868CFF] to-[#4318FF]">
-            <img className="w-[60px] m-auto pb-5" src="Group2.svg" alt="" />
-            <h3 className="text-center text-3xl mb-3">Announce</h3>
-            <p>
-              Register to set up your terms, i.e. fee, reply time, visability,
-              charity organization (optional) etc. and get a link.
-            </p>
+          <div className="bg-[#1E3A8A] shadow-2xl dark:shadow-bg_c_2-dark p-5 py-5 w-[300px] max-h-[500px] rounded-2xl bg-gradient-to-br from-[#868CFF] to-[#4318FF]">
+            <img className="w-[60px] m-auto pb-2" src="Group2.svg" alt="" />
+            <h3 className="text-center text-[20px] mb-3">
+              {t('HowItWorks.2t')}
+            </h3>
+            <p>{t('HowItWorks.2d')}</p>
           </div>
-          <div className="bg-[#1E3A8A] p-8 w-[300px] h-[300px] rounded-2xl bg-gradient-to-br from-[#868CFF] to-[#4318FF]">
-            <img className="w-[60px] m-auto pb-5" src="Group3.svg" alt="" />
-            <h3 className="text-center text-3xl mb-3">Message</h3>
-            <p>
-              Register to set up your terms, i.e. fee, reply time, visability,
-              charity organization (optional) etc. and get a link.
-            </p>
-          </div>
-        </div>
-
-        <div className="max-w-[500px] m-auto text_c_0">
-          <div>
-            <p className="text-center">FAQ</p>
-          </div>
-          <div className="px-2.5">
-            <div className="bg_c_1  t_c_1000 flex justify-between  p-2.5 px-5 rounded-2xl my-3">
-              <p>What’s up</p>
-              <img src="barIcon.svg" alt="" />
-            </div>
-            <div className="bg_c_1 t_c_1000 flex justify-between  p-2.5 px-5 rounded-2xl my-3">
-              <p>What’s up</p>
-              <img src="barIcon.svg" alt="" />
-            </div>
-            <div className="bg_c_1 t_c_1000 flex justify-between  p-2.5 px-5 rounded-2xl my-3">
-              <p>What’s up</p>
-              <img src="barIcon.svg" alt="" />
-            </div>
+          <div className="bg-[#1E3A8A] shadow-2xl dark:shadow-bg_c_2-dark p-5 py-5 w-[300px] max-h-[500px] rounded-2xl bg-gradient-to-br from-[#868CFF] to-[#4318FF]">
+            <img className="w-[60px] m-auto pb-2" src="Group3.svg" alt="" />
+            <h3 className="text-center text-[20px] mb-3">
+              {t('HowItWorks.3t')}
+            </h3>
+            <p>{t('HowItWorks.3d')}</p>
           </div>
         </div>
 
-        <div className="flex justify-center mt-5 mb-10">
-          <button className="main_color   w-[150px] text-white rounded-full px-4 py-2">
-            LABEL
-          </button>
-        </div>
+
+        <FAQ />
       </main>
       <Footer />
     </>
