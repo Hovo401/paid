@@ -4,6 +4,7 @@ import Header from '../components/header/Header.component';
 import { NavLink, useNavigate } from 'react-router-dom';
 import api from '../api/api';
 import { AuthContext } from '../context/AuthContext';
+import GoogleAuth from '../components/GoogleOAuth';
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -89,6 +90,9 @@ function Login() {
         <div className="bg_c_1 t_c_1000 p-5 max-w-[400px] mx-auto  shadow-lg rounded-2xl">
           <div>
             <h2 className="text-2xl font-bold text_c_0 mb-6">Login</h2>
+          </div>
+          <div className="mb-4 text_c_0">
+            <GoogleAuth />
           </div>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
