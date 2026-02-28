@@ -1,0 +1,87 @@
+import { CreateSessionDto } from './dto/create-session.dto';
+import { UpdateSessionDto } from './dto/update-session.dto';
+import { PrismaService } from 'src/prisma/prisma.service';
+export declare class SessionService {
+    private prisma;
+    constructor(prisma: PrismaService);
+    create(createSessionDto: CreateSessionDto): Promise<{
+        id: number;
+        rating: number | null;
+        createdAt: Date;
+        fullName: string;
+        content: string;
+        authorId: number;
+        about: string | null;
+        skills: string | null;
+        experience: string | null;
+        education: string | null;
+        languages: string | null;
+        price: number;
+        videoUrl: string;
+        updatedAt: Date;
+    }>;
+    findAll(): Promise<{
+        id: number;
+        rating: number | null;
+        createdAt: Date;
+        fullName: string;
+        content: string;
+        authorId: number;
+        about: string | null;
+        skills: string | null;
+        experience: string | null;
+        education: string | null;
+        languages: string | null;
+        price: number;
+        videoUrl: string;
+        updatedAt: Date;
+    }[]>;
+    findOne(id: number): Promise<{
+        id: number;
+        rating: number | null;
+        createdAt: Date;
+        fullName: string;
+        content: string;
+        authorId: number;
+        about: string | null;
+        skills: string | null;
+        experience: string | null;
+        education: string | null;
+        languages: string | null;
+        price: number;
+        videoUrl: string;
+        updatedAt: Date;
+    } | null>;
+    update(id: number, updateSessionDto: UpdateSessionDto, userId: number): Promise<{
+        id: number;
+        rating: number | null;
+        createdAt: Date;
+        fullName: string;
+        content: string;
+        authorId: number;
+        about: string | null;
+        skills: string | null;
+        experience: string | null;
+        education: string | null;
+        languages: string | null;
+        price: number;
+        videoUrl: string;
+        updatedAt: Date;
+    }>;
+    remove(id: number, userId: number): Promise<{
+        id: number;
+        rating: number | null;
+        createdAt: Date;
+        fullName: string;
+        content: string;
+        authorId: number;
+        about: string | null;
+        skills: string | null;
+        experience: string | null;
+        education: string | null;
+        languages: string | null;
+        price: number;
+        videoUrl: string;
+        updatedAt: Date;
+    }>;
+}
