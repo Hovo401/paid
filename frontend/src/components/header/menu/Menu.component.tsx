@@ -14,7 +14,7 @@ function Menu({ menuOpen }: { menuOpen: boolean }) {
           className={({ isActive }) => `${isActive ? 'underline' : ''}`}
         >
           <div className="flex items-center gap-3 cursor-pointer hover:underline">
-            <img src="personIcon.svg" className="w-[18px] h-[18px]" alt="" />
+            <img src="static/personIcon.svg" className="w-[18px] h-[18px]" alt="" />
             <p>Accaunt</p>
           </div>
         </NavLink>

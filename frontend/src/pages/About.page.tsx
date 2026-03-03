@@ -35,7 +35,7 @@ function About() {
             </div>
             <div className="flex flex-1/2 order-1 lg:order-none  items-start  justify-center lg:w-[50%] ">
               <img
-                src="GroupAbout.svg"
+                src="static/GroupAbout.svg"
                 className="w-[80%]  max-w-[360px] min-w-[200px] "
                 alt=""
               />

@@ -18,21 +18,21 @@ function HowItWorks() {
           className="w-[100%] flex justify-center gap-15 mt-10 mb-20 flex-wrap text-[15px] text-white  "
         >
           <div className="bg-[#1E3A8A]  shadow-2xl dark:shadow-bg_c_2-dark p-5 py-5 w-[300px]  max-h-[500px] rounded-2xl bg-gradient-to-br from-[#868CFF] to-[#4318FF]">
-            <img className="w-[60px] m-auto pb-2" src="Group.svg" alt="" />
+            <img className="w-[60px] m-auto pb-2" src="static/Group.svg" alt="" />
             <h3 className="text-center text-[20px] mb-3">
               {t('HowItWorks.1t')}
             </h3>
             <p>{t('HowItWorks.1d')}</p>
           </div>
           <div className="bg-[#1E3A8A] shadow-2xl dark:shadow-bg_c_2-dark p-5 py-5 w-[300px] max-h-[500px] rounded-2xl bg-gradient-to-br from-[#868CFF] to-[#4318FF]">
-            <img className="w-[60px] m-auto pb-2" src="Group2.svg" alt="" />
+            <img className="w-[60px] m-auto pb-2" src="static/Group2.svg" alt="" />
             <h3 className="text-center text-[20px] mb-3">
               {t('HowItWorks.2t')}
             </h3>
             <p>{t('HowItWorks.2d')}</p>
           </div>
           <div className="bg-[#1E3A8A] shadow-2xl dark:shadow-bg_c_2-dark p-5 py-5 w-[300px] max-h-[500px] rounded-2xl bg-gradient-to-br from-[#868CFF] to-[#4318FF]">
-            <img className="w-[60px] m-auto pb-2" src="Group3.svg" alt="" />
+            <img className="w-[60px] m-auto pb-2" src="static/Group3.svg" alt="" />
             <h3 className="text-center text-[20px] mb-3">
               {t('HowItWorks.3t')}
             </h3>

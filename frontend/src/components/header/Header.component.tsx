@@ -43,7 +43,7 @@ function Header({ mode = 'standart' }: { mode?: 'standart' | 'sitebar' }) {
               } `
             }
           >
-            {/* <img src="logo.png" className='h-[40px] w-full' alt="" /> */}
+            {/* <img src="static/logo.png" className='h-[40px] w-full' alt="" /> */}
             PRIMESS
           </NavLink>
           <div className="absolute left-[210px]  flex items-center gap-6">
@@ -82,7 +82,7 @@ function Header({ mode = 'standart' }: { mode?: 'standart' | 'sitebar' }) {
               className="absolute left-3 top-1/2 transform -translate-y-1/2 bg-transparent border-none cursor-pointer p-0"
               aria-label="Submit search"
             >
-              <img src="search.svg" alt="Search icon" className="w-4 h-4" />
+              <img src="static/search.svg" alt="Search icon" className="w-4 h-4" />
             </button>
           </div> */}
 
@@ -95,7 +95,7 @@ function Header({ mode = 'standart' }: { mode?: 'standart' | 'sitebar' }) {
               type="submit"
               className="w-[28px] h-[28px] hidden lg:block cursor-pointer"
             >
-              <img src="personIcon.svg" className="w-[23px] h-[23px]" />
+              <img src="static/personIcon.svg" className="w-[23px] h-[23px]" />
             </button>
           </NavLink> */}
 
@@ -106,7 +106,7 @@ function Header({ mode = 'standart' }: { mode?: 'standart' | 'sitebar' }) {
                   type="submit"
                   className="w-[28px] h-[28px] hidden lg:block cursor-pointer"
                 >
-                  <img src="personIcon.svg" className="w-[23px] h-[23px]" />
+                  <img src="static/personIcon.svg" className="w-[23px] h-[23px]" />
                 </button>
               </NavLink>
               <NavLink to="/login">

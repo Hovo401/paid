@@ -63,7 +63,7 @@ function MainAccaunt() {
                 onClick={() => setCategoriesSitebarOpen(false)}
               >
                 <img
-                  src="personIcon.svg"
+                  src="static/personIcon.svg"
                   className="w-[18px] h-[18px]"
                   alt="Иконка аккаунта"
                 />
@@ -80,7 +80,7 @@ function MainAccaunt() {
                 onClick={() => setCategoriesSitebarOpen(false)}
               >
                 <img
-                  src="inbox.svg"
+                  src="static/inbox.svg"
                   className="w-[18px] h-[18px]"
                   alt="Иконка входящих"
                 />
@@ -97,7 +97,7 @@ function MainAccaunt() {
                 onClick={() => setCategoriesSitebarOpen(false)}
               >
                 <img
-                  src="send.svg"
+                  src="static/send.svg"
                   className="w-[18px] h-[18px]"
                   alt="Иконка отправленных"
                 />
@@ -114,7 +114,7 @@ function MainAccaunt() {
                 onClick={() => setCategoriesSitebarOpen(false)}
               >
                 <img
-                  src="draft.svg"
+                  src="static/draft.svg"
                   className="w-[18px] h-[18px]"
                   alt="Иконка черновиков"
                 />
@@ -131,7 +131,7 @@ function MainAccaunt() {
                 onClick={() => setCategoriesSitebarOpen(false)}
               >
                 <img
-                  src="finance.svg"
+                  src="static/finance.svg"
                   className="w-[18px] h-[18px]"
                   alt="Иконка финансов"
                 />
@@ -148,7 +148,7 @@ function MainAccaunt() {
                 onClick={() => setCategoriesSitebarOpen(false)}
               >
                 <img
-                  src="personIcon.svg"
+                  src="static/personIcon.svg"
                   className="w-[18px] h-[18px]"
                   alt="Иконка настроек"
                 />

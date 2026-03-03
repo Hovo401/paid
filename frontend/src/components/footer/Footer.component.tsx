@@ -25,10 +25,10 @@ function Footer() {
           <div className="flex-shrink-0 mx-auto md:mx-0 w-[130px] mb-4 md:mb-0">
             <p className=" text-[24px]  font-bold">Paid Email</p>
             <div className="flex space-x-2 mt-2">
-              <img src="instagram.svg" alt="Email" className="w-6 h-6" />
-              <img src="facebook.svg" alt="Facebook" className="w-6 h-6" />
-              <img src="instagram.svg" alt="Instagram" className="w-6 h-6" />
-              <img src="twitter.svg" alt="Message" className="w-6 h-6" />
+              <img src="static/instagram.svg" alt="Email" className="w-6 h-6" />
+              <img src="static/facebook.svg" alt="Facebook" className="w-6 h-6" />
+              <img src="static/instagram.svg" alt="Instagram" className="w-6 h-6" />
+              <img src="static/twitter.svg" alt="Message" className="w-6 h-6" />
             </div>
           </div>
 

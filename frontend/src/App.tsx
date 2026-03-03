@@ -13,6 +13,7 @@ import MainAccaunt from './pages/accaunt/MainAccaunt.Page';
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 
+
 function App() {
   useEffect(() => {
     const darkMode_ = localStorage.getItem('darkMode') ?? 0;

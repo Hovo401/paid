@@ -149,7 +149,7 @@ function UserPage() {
                 <div className=" p-8 w-[200px]  rounded-2xl ">
                   <img
                     className="w-[60px] m-auto pb-5"
-                    src="Group.svg"
+                    src="static/Group.svg"
                     alt=""
                   />
                   <h3 className="text-center text-3xl mb-3">Registration</h3>
@@ -162,7 +162,7 @@ function UserPage() {
                 <div className=" p-8 w-[200px] rounded-2xl ">
                   <img
                     className="w-[60px] m-auto pb-5"
-                    src="Group2.svg"
+                    src="static/Group2.svg"
                     alt=""
                   />
                   <h3 className="text-center text-3xl mb-3">Announce</h3>
@@ -175,7 +175,7 @@ function UserPage() {
                 <div className=" p-8 w-[200px]  rounded-2xl">
                   <img
                     className="w-[60px] m-auto pb-5"
-                    src="Group3.svg"
+                    src="static/Group3.svg"
                     alt=""
                   />
                   <h3 className="text-center text-3xl mb-3">Message</h3>
@@ -195,15 +195,15 @@ function UserPage() {
               <div>
                 <div className="bg_c_1 t_c_1000 flex justify-between  p-2.5 px-5 rounded-2xl my-3">
                   <p>What’s up</p>
-                  <img src="barIcon.svg" alt="" />
+                  <img src="static/barIcon.svg" alt="" />
                 </div>
                 <div className="bg_c_1 t_c_1000 flex justify-between  p-2.5 px-5 rounded-2xl my-3">
                   <p>What’s up</p>
-                  <img src="barIcon.svg" alt="" />
+                  <img src="static/barIcon.svg" alt="" />
                 </div>
                 <div className="bg_c_1 t_c_1000 flex justify-between  p-2.5 px-5 rounded-2xl my-3">
                   <p>What’s up</p>
-                  <img src="barIcon.svg" alt="" />
+                  <img src="static/barIcon.svg" alt="" />
                 </div>
               </div>
             </div>

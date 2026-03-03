@@ -16,7 +16,7 @@ function MassageComponent({
         <div className="mb-3">
           <button className="" onClick={() => setOpenMassageID(-1)}>
             <span className="inline-block hover:cursor-pointer relative">
-              <img src="arrow.png" className="w-[20px] h-[20px]" alt="" />
+              <img src="static/arrow.png" className="w-[20px] h-[20px]" alt="" />
             </span>
           </button>
         </div>
@@ -27,7 +27,7 @@ function MassageComponent({
               <div className="flex items-center gap-4 ">
                 <div className=" w-[40px] h-[40px] rounded-full overflow-hidden">
                   <img
-                    src="pers1.png"
+                    src="static/pers1.png"
                     className="w-full h-full  object-cover transition-transform duration-300"
                     alt=""
                   />

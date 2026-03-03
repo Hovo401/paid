@@ -44,7 +44,7 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
         aria-haspopup="true"
         aria-expanded={isOpen}
       >
-        <img src="globe.svg" alt="Language" className=" w-[30px] h-[30px]" />
+        <img src="static/globe.svg" alt="Language" className=" w-[30px] h-[30px]" />
       </button>
       {isOpen && (
         <div

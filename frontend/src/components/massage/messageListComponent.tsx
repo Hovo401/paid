@@ -21,7 +21,7 @@ function MassageListComponent({
           className="absolute left-3 top-1/2 transform -translate-y-1/2 bg-transparent border-none cursor-pointer p-0"
           aria-label="Submit search"
         >
-          <img src="search.svg" alt="Search icon" className="w-4 h-4" />
+          <img src="static/search.svg" alt="Search icon" className="w-4 h-4" />
         </button>
       </div>
 
