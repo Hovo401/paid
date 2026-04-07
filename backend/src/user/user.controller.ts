@@ -8,10 +8,10 @@ import {
   Put,
 } from '@nestjs/common';
 import { UserService } from './user.service';
-import { Roles } from 'src/auth/roles.decorator';
-import { Role } from 'src/enums/role.enum';
-import { Public } from 'src/auth/constants';
-import { signInDto } from 'src/auth/dto/signInDto';
+import { Roles } from '@src/auth/roles.decorator';
+import { Role } from '@src/enums/role.enum';
+import { Public } from '@src/auth/constants';
+import { signInDto } from '@src/auth/dto/signInDto';
 
 @Controller('users')
 export class UserController {
@@ -41,10 +41,7 @@ export class UserController {
 
   @Put(':id')
   @Public()
-  updateUser(
-    @Param('id') id: number,
-    @Body() body: signInDto,
-  ) {
+  updateUser(@Param('id') id: number, @Body() body: signInDto) {
     return this.UserService.updateUser(Number(id), body);
   }
 }

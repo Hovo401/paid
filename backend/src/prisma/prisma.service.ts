@@ -1,9 +1,22 @@
-// src/prisma/prisma.service.ts
 import { Injectable, OnModuleInit, OnModuleDestroy } from '@nestjs/common';
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from '../generated/prisma/client'; // ← новый путь
+import { PrismaLibSql } from '@prisma/adapter-libsql';
+import { createClient } from '@libsql/client';
 
 @Injectable()
-export class PrismaService extends PrismaClient implements OnModuleInit, OnModuleDestroy {
+export class PrismaService
+  extends PrismaClient
+  implements OnModuleInit, OnModuleDestroy
+{
+  constructor() {
+    const adapter = new PrismaLibSql({
+      // ← PrismaLibSql
+      url: process.env.DATABASE_URL as string,
+      // authToken: process.env.TURSO_AUTH_TOKEN, // если Turso
+    }); // ← тоже меняем на PrismaLibSQL
+    super({ adapter });
+  }
+
   async onModuleInit() {
     await this.$connect();
   }

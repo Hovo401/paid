@@ -10,10 +10,10 @@ import {
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { Public } from './constants';
-import { User } from '@prisma/client';
-import { UsersService } from 'src/users/users.service';
+import { User } from '../generated/prisma/client';
+import { UsersService } from '@src/users/users.service';
 import { JwtService } from '@nestjs/jwt';
-import { Req } from 'src/interface/req.interfece';
+import { Req } from '@src/interface/req.interfece';
 import { MailService } from '../mail/mail.service';
 
 @Controller('auth')
@@ -22,7 +22,7 @@ export class AuthController {
     private authService: AuthService,
     private usersService: UsersService,
     private jwtService: JwtService,
-    private mailService: MailService
+    private mailService: MailService,
   ) {}
 
   @Public()
@@ -43,13 +43,13 @@ export class AuthController {
     body.password = await this.authService.hashPassword(body.password);
     const user = await this.usersService.createUser(body);
     const payload = { sub: user?.id, email: user?.email, roles: user?.roles };
-     this.mailService.sendMail(
-      user.email, 
-      'Welcome to Paidemail', 
-      'Thank you for registering with Paidemail!', 
-      'welcome', 
+    this.mailService.sendMail(
+      user.email,
+      'Welcome to Paidemail',
+      'Thank you for registering with Paidemail!',
+      'welcome',
       {
-        name: user.name || user.email.split('@')[0], 
+        name: user.name || user.email.split('@')[0],
         email: user.email,
         appUrl: 'https://diotek.xyz/paidemail/',
       },

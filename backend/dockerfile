@@ -3,6 +3,7 @@ FROM node:20-alpine AS builder
 RUN corepack enable
 WORKDIR /app
 
+COPY prisma.config.ts ./
 COPY package.json yarn.lock .yarnrc.yml ./
 COPY .yarn ./.yarn 
 COPY tsconfig*.json ./
@@ -27,6 +28,7 @@ RUN corepack enable
 WORKDIR /app
 
 # Копируем только нужное
+COPY prisma.config.ts ./
 COPY --from=builder /app/package.json /app/yarn.lock /app/.yarnrc.yml ./
 COPY --from=builder /app/.yarn ./.yarn
 COPY --from=builder /app/prisma ./prisma

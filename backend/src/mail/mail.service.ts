@@ -10,7 +10,6 @@ export class MailService {
   private transporter: nodemailer.Transporter;
 
   constructor(private configService: ConfigService) {
-
     this.transporter = nodemailer.createTransport({
       host: this.configService.get<string>('SMTP_HOST', 'diotek.xyz'),
       port: this.configService.get<number>('SMTP_PORT', 587),
@@ -56,7 +55,9 @@ export class MailService {
       console.log(`Email sent to ${to}`);
     } catch (error) {
       console.error('Error sending email:', error);
-      throw new Error(`Failed to send email: ${error.message}`);
+      throw new Error(
+        `Failed to send email: ${error instanceof Error ? error.message : String(error)}`,
+      );
     }
   }
 }

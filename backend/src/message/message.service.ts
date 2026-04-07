@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { CreateMessageDto } from './dto/create-message.dto';
 import { PrismaService } from '../prisma/prisma.service';
-import type { email } from 'src/interface/message';
+import type { email } from '@src/interface/message';
 
 @Injectable()
 export class MessageService {
@@ -42,13 +42,15 @@ export class MessageService {
     });
 
     inbox.push(email);
-    return {to:await this.prisma.user.update({
-      where: { id: body.id },
-      data: {
-        inbox: JSON.stringify(inbox),
-      },
-    }),
-    from};
+    return {
+      to: await this.prisma.user.update({
+        where: { id: body.id },
+        data: {
+          inbox: JSON.stringify(inbox),
+        },
+      }),
+      from,
+    };
   }
 
   async findAll(seningUserId: number) {

@@ -13,10 +13,10 @@ import {
 import { SessionService } from './session.service';
 import { CreateSessionDto } from './dto/create-session.dto';
 import { UpdateSessionDto } from './dto/update-session.dto';
-import { Req } from 'src/interface/req.interfece';
-import { Roles } from 'src/auth/roles.decorator';
-import { Role } from 'src/enums/role.enum';
-import { Public } from 'src/auth/constants';
+import { Req } from '@src/interface/req.interfece';
+import { Roles } from '@src/auth/roles.decorator';
+import { Role } from '@src/enums/role.enum';
+import { Public } from '@src/auth/constants';
 
 @Controller('session')
 export class SessionController {

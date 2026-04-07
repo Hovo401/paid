@@ -1,7 +1,7 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import { CreateSessionDto } from './dto/create-session.dto';
 import { UpdateSessionDto } from './dto/update-session.dto';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from '@src/prisma/prisma.service';
 
 @Injectable()
 export class SessionService {
@@ -9,7 +9,7 @@ export class SessionService {
 
   async create(createSessionDto: CreateSessionDto) {
     return this.prisma.session.create({
-      data: createSessionDto
+      data: createSessionDto,
     });
   }
 
@@ -19,7 +19,7 @@ export class SessionService {
 
   async findOne(id: number) {
     return await this.prisma.session.findFirst({
-      where: { id }
+      where: { id },
     });
   }
 
@@ -30,8 +30,8 @@ export class SessionService {
     }
     return this.prisma.session.update({
       where: { id },
-      data: updateSessionDto
-    })
+      data: updateSessionDto,
+    });
   }
 
   async remove(id: number, userId: number) {
@@ -40,7 +40,7 @@ export class SessionService {
       throw new ForbiddenException();
     }
     return this.prisma.session.delete({
-      where : { id }
+      where: { id },
     });
   }
 }
