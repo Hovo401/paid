@@ -1,0 +1,35 @@
+version: "3.9"
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: dockerfile
+    container_name: paidemail-backend
+    environment:
+      NODE_ENV: development
+      DATABASE_URL: file:./dev.db
+    ports:
+      - "3000:3000"
+    working_dir: /app
+    command: ["yarn", "run", "start:prod"]
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: paidemail-frontend
+    environment:
+      # При необходимости укажите URL backend для клиента
+      # Например, если фронт использует VITE_API_URL:
+      # VITE_API_URL: "http://backend:3000"
+      NODE_ENV: development
+    ports:
+      - "5173:5173"
+    working_dir: /app
+    command: ["yarn", "dev", "--host"]
+    depends_on:
+      - backend
+    restart: unless-stopped
+

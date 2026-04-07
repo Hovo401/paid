@@ -16,24 +16,34 @@ COPY . .
 RUN yarn prisma generate
 RUN yarn build
 
+# === СОЗДАЁМ БАЗУ ЗДЕСЬ (в builder) ===
+ENV DATABASE_URL="file:./dev.db"
+RUN yarn prisma db push
+# =====================================
 
 FROM node:20-alpine
 
 RUN corepack enable
 WORKDIR /app
 
-
+# Копируем только нужное
 COPY --from=builder /app/package.json /app/yarn.lock /app/.yarnrc.yml ./
 COPY --from=builder /app/.yarn ./.yarn
 COPY --from=builder /app/prisma ./prisma
-COPY --from=builder /app/dist ./dist
 
 RUN yarn workspaces focus --production
 
+# Prisma бинарники (обязательно для Yarn PnP)
 COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
 COPY --from=builder /app/node_modules/@prisma/client ./node_modules/@prisma/client
 COPY --from=builder /app/node_modules/prisma ./node_modules/prisma
 
-EXPOSE 3000
 
+# ←←← ОБЯЗАТЕЛЬНО! (у тебя было пропущено) ←←←
+COPY --from=builder /app/dist ./dist
+
+# Копируем уже созданную базу из builder
+COPY --from=builder /app/dev.db ./dev.db
+
+EXPOSE 3000
 CMD ["yarn", "run", "start:prod"]
