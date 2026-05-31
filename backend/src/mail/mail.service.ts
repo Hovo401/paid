@@ -16,7 +16,7 @@ export class MailService {
       secure: false,
       auth: {
         user: this.configService.get<string>('SMTP_USER', 'primess@diotek.xyz'),
-        pass: this.configService.get<string>('SMTP_PASS', 'pass'),
+        pass: this.configService.get<string>('SMTP_PASS', 'root1234'),
       },
     });
   }
