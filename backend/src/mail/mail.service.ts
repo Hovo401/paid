@@ -11,12 +11,12 @@ export class MailService {
 
   constructor(private configService: ConfigService) {
     this.transporter = nodemailer.createTransport({
-      host: this.configService.get<string>('SMTP_HOST', 'diotek.xyz'),
+      host: this.configService.get<string>('SMTP_HOST', 'primess@diotek.xyz'),
       port: this.configService.get<number>('SMTP_PORT', 587),
       secure: false,
       auth: {
-        user: this.configService.get<string>('SMTP_USER', 'hovo@diotek.xyz'),
-        pass: this.configService.get<string>('SMTP_PASS', 'your-password:)'),
+        user: this.configService.get<string>('SMTP_USER', 'primess@diotek.xyz'),
+        pass: this.configService.get<string>('SMTP_PASS', 'pass'),
       },
     });
   }
@@ -33,7 +33,7 @@ export class MailService {
       if (template) {
         const templatePath = join(
           __dirname,
-          '../..',
+          '../../../',
           'templates',
           `${template}.hbs`,
         );
@@ -45,7 +45,7 @@ export class MailService {
       await this.transporter.sendMail({
         from: this.configService.get<string>(
           'SMTP_FROM',
-          '"Diotek" <hovo@diotek.xyz>',
+          '"Diotek" <primess@diotek.xyz>',
         ),
         to,
         subject,
