@@ -1,9 +1,11 @@
 import axios, { type AxiosInstance, type AxiosError } from 'axios';
 
-const BASE_URL = import.meta.env.BACKEND_API_URL || 'http://localhost:3000/';
+const BASE_URL =
+  import.meta.env.BACKEND_API_URL || 'https://paid2-7uhm.onrender.com/';
 
 const api: AxiosInstance = axios.create({
   baseURL: BASE_URL,
+  // baseURL: 'http://localhost:3000/',
   // baseURL: 'https://diotek.xyz/paidemailApi/',
   // baseURL: `${window.location.origin}`,
   timeout: 10000,
