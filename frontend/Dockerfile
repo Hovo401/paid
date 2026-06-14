@@ -3,13 +3,12 @@ FROM node:24-alpine
 RUN corepack enable
 WORKDIR /app
 
-COPY package.json yarn.lock .yarnrc.yml ./
-COPY .yarn ./.yarn
+COPY package.json pnpm-lock.yaml ./
 
-RUN yarn install
+RUN pnpm install --frozen-lockfile
 
 COPY . .
 
 EXPOSE 5173
 
-CMD ["yarn", "dev", "--host"]
+CMD ["pnpm", "dev", "--host"]

@@ -1,13 +1,12 @@
 import axios, { type AxiosInstance, type AxiosError } from 'axios';
 
-const BASE_URL =
-  import.meta.env.BACKEND_API_URL || 'https://paid2-7uhm.onrender.com/';
+// ВАЖНО: переменная ДОЛЖНА начинаться с VITE_ — иначе Vite не отдаст её в браузер.
+// Значение читается при сборке (prod) или при старте dev-сервера (docker).
+// Fallback — для локального `pnpm dev`, когда backend поднят на localhost:3000.
+const BASE_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:3000';
 
 const api: AxiosInstance = axios.create({
   baseURL: BASE_URL,
-  // baseURL: 'http://localhost:3000/',
-  // baseURL: 'https://diotek.xyz/paidemailApi/',
-  // baseURL: `${window.location.origin}`,
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',

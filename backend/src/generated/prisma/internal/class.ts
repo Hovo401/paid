@@ -17,8 +17,8 @@ import type * as Prisma from "./prismaNamespace"
 
 const config: runtime.GetPrismaClientConfig = {
   "previewFeatures": [],
-  "clientVersion": "7.6.0",
-  "engineVersion": "75cbdc1eb7150937890ad5465d861175c6624711",
+  "clientVersion": "7.8.0",
+  "engineVersion": "3c6e192761c0362d496ed980de936e2f3cebcd3a",
   "activeProvider": "sqlite",
   "inlineSchema": "generator client {\n  provider     = \"prisma-client\"\n  output       = \"../src/generated/prisma\"\n  moduleFormat = \"cjs\"\n}\n\ndatasource db {\n  provider = \"sqlite\"\n}\n\nenum Role {\n  User\n  Freelancer\n  Admin\n}\n\nenum Gender {\n  Male\n  Female\n  Demigirl\n  Neutrois\n  Other\n}\n\nmodel User {\n  id                 Int       @id @default(autoincrement())\n  name               String\n  firstName          String    @default(\"\")\n  email              String    @unique\n  age                Int       @default(0)\n  Bio                String    @default(\"\")\n  avatarURL          String?\n  rating             Float     @default(5)\n  pricePerOneMessage Float?\n  location           String?\n  profession         String?\n  hor                Float?\n  birthday           DateTime?\n\n  inbox String @default(\"[]\")\n  send  String @default(\"[]\")\n  draft String @default(\"[]\")\n\n  gender    Gender   @default(Neutrois)\n  password  String\n  roles     Role     @default(User)\n  blocked   Boolean  @default(false)\n  createdAt DateTime @default(now())\n}\n\nmodel Session {\n  id         Int      @id @default(autoincrement())\n  fullName   String   @unique\n  content    String\n  about      String?\n  skills     String?\n  experience String?\n  education  String?\n  languages  String?\n  price      Float    @default(0)\n  rating     Int?\n  authorId   Int\n  createdAt  DateTime @default(now())\n  updatedAt  DateTime @updatedAt\n  videoUrl   String   @default(\"[]\")\n}\n",
   "runtimeDataModel": {
@@ -180,7 +180,7 @@ export interface PrismaClient<
    * 
    * Read more in our [docs](https://www.prisma.io/docs/orm/prisma-client/queries/transactions).
    */
-  $transaction<P extends Prisma.PrismaPromise<any>[]>(arg: [...P], options?: { isolationLevel?: Prisma.TransactionIsolationLevel }): runtime.Types.Utils.JsPromise<runtime.Types.Utils.UnwrapTuple<P>>
+  $transaction<P extends Prisma.PrismaPromise<any>[]>(arg: [...P], options?: { maxWait?: number, timeout?: number, isolationLevel?: Prisma.TransactionIsolationLevel }): runtime.Types.Utils.JsPromise<runtime.Types.Utils.UnwrapTuple<P>>
 
   $transaction<R>(fn: (prisma: Omit<PrismaClient, runtime.ITXClientDenyList>) => runtime.Types.Utils.JsPromise<R>, options?: { maxWait?: number, timeout?: number, isolationLevel?: Prisma.TransactionIsolationLevel }): runtime.Types.Utils.JsPromise<R>
 
