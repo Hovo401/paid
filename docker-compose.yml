@@ -4,9 +4,12 @@ services:
       context: ./backend
       dockerfile: dockerfile
     container_name: paidemail-backend
+    env_file:
+      - ./backend/.env.example
+      - path: ./backend/.env
+        required: false
     environment:
       NODE_ENV: development
-      DATABASE_URL: file:./dev.db
     ports:
       - "8000:8000"
     working_dir: /app
@@ -18,9 +21,12 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     container_name: paidemail-frontend
+    env_file:
+      - ./frontend/.env.example
+      - path: ./frontend/.env
+        required: false
     environment:
       NODE_ENV: development
-      VITE_API_URL: "http://localhost:8000"
     ports:
       - "5173:5173"
     working_dir: /app

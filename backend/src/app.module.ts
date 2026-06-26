@@ -11,7 +11,7 @@ import { HealthController } from './health.controller';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: ['.env', '.env.production.local'],
+      envFilePath: ['.env'],
     }),
     AuthModule,
     UserModule,
