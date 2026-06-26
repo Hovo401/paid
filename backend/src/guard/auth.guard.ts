@@ -8,6 +8,7 @@ import { JwtService } from '@nestjs/jwt';
 import { IS_PUBLIC_KEY, jwtConstants } from '../auth/constants';
 import { Request } from 'express';
 import { Reflector } from '@nestjs/core';
+import { Payload } from '@src/interface/req.interfece';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -25,18 +26,22 @@ export class AuthGuard implements CanActivate {
       return true;
     }
 
-    const request = context.switchToHttp().getRequest();
+    const request = context
+      .switchToHttp()
+      .getRequest<Request & { payload?: Payload }>();
 
     const token = this.extractTokenFromHeader(request);
     if (!token) {
       throw new UnauthorizedException();
     }
     try {
-      const payload = await this.jwtService.verifyAsync(token, {
+      const payload = await this.jwtService.verifyAsync<
+        Payload & { tim?: number }
+      >(token, {
         secret: jwtConstants.secret,
       });
-      payload['tim'] = Math.floor(Date.now() / 1000);
-      request['payload'] = payload;
+      payload.tim = Math.floor(Date.now() / 1000);
+      request.payload = payload;
     } catch {
       throw new UnauthorizedException();
     }

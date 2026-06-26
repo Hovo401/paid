@@ -1,16 +1,23 @@
 import React from 'react';
-import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
+import { GoogleOAuthProvider, GoogleLogin, type CredentialResponse } from '@react-oauth/google';
 import { jwtDecode } from 'jwt-decode'; // Библиотека для декодирования JWT
+
+interface DecodedGoogleCredential {
+  sub: string;
+  email: string;
+  name: string;
+  picture: string;
+}
 
 // Ваш Client ID из Google Cloud Console
 const clientId = '197069996392-1q4b642raa9sck17jjkbc5t1fmtqequm.apps.googleusercontent.com'; // Замените на реальный Client ID
 
 const GoogleAuth: React.FC = () => {
   // Функция обработки успешной авторизации
-  const handleSuccess = (credentialResponse: any) => {
+  const handleSuccess = (credentialResponse: CredentialResponse) => {
     try {
       // Декодируем JWT токен, чтобы получить данные пользователя
-      const decoded: any = jwtDecode(credentialResponse.credential);
+      const decoded = jwtDecode<DecodedGoogleCredential>(credentialResponse.credential ?? '');
       console.log('Успешная авторизация:', decoded);
 
       // Пример данных, которые можно извлечь из decoded:

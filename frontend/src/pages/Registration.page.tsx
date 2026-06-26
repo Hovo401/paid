@@ -33,9 +33,9 @@ function Registration() {
     resolver: zodResolver(schema),
   });
 
-  const onSubmit = (data: any) => {
+  const onSubmit = (data: z.infer<typeof schema>) => {
     const fetch = async () => {
-      const login = await api.post<any>('/auth/regoister', {
+      const login = await api.post('/auth/regoister', {
         name: data.name,
         email: data.email,
         password: data.password,

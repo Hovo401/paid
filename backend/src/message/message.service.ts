@@ -15,8 +15,8 @@ export class MessageService {
       where: { id: seningUserId },
     });
     if (!inUser || !userData) return '';
-    const inbox = JSON.parse(userData?.inbox ?? '[]');
-    const send = JSON.parse(userData?.send ?? '[]');
+    const inbox = JSON.parse(userData?.inbox ?? '[]') as email[];
+    const send = JSON.parse(userData?.send ?? '[]') as email[];
 
     const email: email = {
       in: {

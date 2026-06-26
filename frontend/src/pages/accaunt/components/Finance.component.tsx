@@ -1,4 +1,12 @@
-function Finance({setCategoriesSitebarOpen, CategoriesSitebarOpen}:any) {
+import type { Dispatch, SetStateAction } from 'react';
+
+function Finance({
+  setCategoriesSitebarOpen,
+  CategoriesSitebarOpen,
+}: {
+  setCategoriesSitebarOpen: Dispatch<SetStateAction<boolean>>;
+  CategoriesSitebarOpen: boolean;
+}) {
     return (
       <>
         <div className="mt-20 flex  justify-between content-center">

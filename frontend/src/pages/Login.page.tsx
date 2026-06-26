@@ -1,9 +1,9 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, type FormEvent, type ChangeEvent } from 'react';
 import Footer from '../components/footer/Footer.component';
 import Header from '../components/header/Header.component';
 import { NavLink, useNavigate } from 'react-router-dom';
 import api from '../api/api';
-import { AuthContext } from '../context/AuthContext';
+import { AuthContext } from '../context/AuthContext.context';
 import GoogleAuth from '../components/GoogleOAuth';
 
 function Login() {
@@ -47,7 +47,7 @@ function Login() {
     return isValid;
   };
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (validateForm()) {
       const fetch = async () => {
@@ -63,15 +63,15 @@ function Login() {
           } else {
             alert('code : ' + res.status);
           }
-        } catch (e: any) {
-          alert('code : ' + e?.status && '');
+        } catch (e: unknown) {
+          alert('code : ' + (e as { status?: number })?.status && '');
         }
       };
       fetch();
     }
   };
 
-  const handleChange = (e: any) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,

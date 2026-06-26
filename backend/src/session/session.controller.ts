@@ -4,10 +4,8 @@ import {
   Post,
   Request,
   Body,
-  Patch,
   Param,
   Delete,
-  ForbiddenException,
   Put,
 } from '@nestjs/common';
 import { SessionService } from './session.service';

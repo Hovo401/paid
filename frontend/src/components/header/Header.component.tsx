@@ -3,7 +3,7 @@ import Menu from './menu/Menu.component';
 import { useState, useContext } from 'react';
 import LanguageSwitcher from '../LanguageSwitcher';
 import { useTranslation } from 'react-i18next';
-import { AuthContext } from '../../context/AuthContext';
+import { AuthContext } from '../../context/AuthContext.context';
 
 function Header({ mode = 'standart' }: { mode?: 'standart' | 'sitebar' }) {
   const [menuOpen, setMenuOpen] = useState(false);

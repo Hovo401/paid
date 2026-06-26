@@ -13,7 +13,7 @@ function FooterColumn() {
 
 function Footer() {
   const toggleDarkMode = () => {
-    const newTeme = !Boolean(+(localStorage.getItem('darkMode') ?? 0));
+    const newTeme = !+(localStorage.getItem('darkMode') ?? 0);
     localStorage.setItem('darkMode', (+newTeme).toString());
     document.documentElement.classList.toggle('dark', !!+newTeme);
   };

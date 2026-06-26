@@ -1,7 +1,7 @@
 import type { userDB } from '../../../Types/api.types';
 import MassageComponent from '../../../components/massage/MassageComponent';
 import MessageListComponent from '../../../components/massage/messageListComponent';
-import { useState } from 'react';
+import { useState, type Dispatch, type SetStateAction } from 'react';
 
 function Send({
   setCategoriesSitebarOpen,
@@ -9,8 +9,8 @@ function Send({
   userDB,
 }: {
   userDB: userDB | null;
-  setCategoriesSitebarOpen: any;
-  CategoriesSitebarOpen: any;
+  setCategoriesSitebarOpen: Dispatch<SetStateAction<boolean>>;
+  CategoriesSitebarOpen: boolean;
 }) {
   const [openMassageID, setOpenMassageID] = useState(-1);
   return (
