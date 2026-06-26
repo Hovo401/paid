@@ -1,12 +1,12 @@
-import { $Enums } from "@prisma/client";
+import { $Enums } from '../../generated/prisma/client';
 
 export class CreateUserDto {
-  name: string;
-  email: string;
-  password: string;
-  roles?: $Enums.Role ;
-  gender?: $Enums.Gender ;
-  age?: number ;
-  aboutMe?: string ;
-  birthday?: Date ;
+  name!: string;
+  email!: string;
+  password!: string;
+  roles?: $Enums.Role;
+  gender?: $Enums.Gender;
+  age?: number;
+  aboutMe?: string;
+  birthday?: Date;
 }

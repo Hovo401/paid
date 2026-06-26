@@ -1,18 +1,9 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-  Request,
-} from '@nestjs/common';
+import { Controller, Get, Post, Body, Request } from '@nestjs/common';
 import { MessageService } from './message.service';
 import { CreateMessageDto } from './dto/create-message.dto';
-import { Req } from 'src/interface/req.interfece';
-import { MailService } from 'src/mail/mail.service';
-import { dateForm } from 'src/utils/Date';
+import { Req } from '@src/interface/req.interfece';
+import { MailService } from '@src/mail/mail.service';
+import { dateForm } from '@src/utils/Date';
 
 @Controller('message')
 export class MessageController {

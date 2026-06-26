@@ -1,39 +1,38 @@
-FROM node:20-alpine AS builder
+FROM node:24-alpine AS builder
 
 RUN corepack enable
 WORKDIR /app
 
-COPY package.json yarn.lock .yarnrc.yml ./
-COPY .yarn ./.yarn 
+COPY prisma.config.ts ./
+COPY package.json pnpm-lock.yaml ./
 COPY tsconfig*.json ./
 COPY nest-cli.json ./
 COPY prisma ./prisma/
 
-RUN yarn install --immutable
+RUN pnpm install --frozen-lockfile
 
 COPY . .
 
-RUN yarn prisma generate
-RUN yarn build
+RUN pnpm prisma generate
+RUN pnpm build
 
+ENV DATABASE_URL="file:./dev.db"
+RUN pnpm prisma db push
 
-FROM node:20-alpine
+FROM node:24-alpine
 
 RUN corepack enable
 WORKDIR /app
 
+COPY --from=builder /app/package.json /app/pnpm-lock.yaml ./
+RUN pnpm install --prod --frozen-lockfile
 
-COPY --from=builder /app/package.json /app/yarn.lock /app/.yarnrc.yml ./
-COPY --from=builder /app/.yarn ./.yarn
-COPY --from=builder /app/prisma ./prisma
 COPY --from=builder /app/dist ./dist
 
-RUN yarn workspaces focus --production
+COPY prisma.config.ts ./
+COPY --from=builder /app/prisma ./prisma
 
-COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
-COPY --from=builder /app/node_modules/@prisma/client ./node_modules/@prisma/client
-COPY --from=builder /app/node_modules/prisma ./node_modules/prisma
+COPY --from=builder /app/dev.db ./dev.db
 
 EXPOSE 3000
-
-CMD ["yarn", "run", "start:prod"]
+CMD ["pnpm", "run", "start:prod"]

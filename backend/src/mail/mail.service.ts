@@ -10,14 +10,13 @@ export class MailService {
   private transporter: nodemailer.Transporter;
 
   constructor(private configService: ConfigService) {
-
     this.transporter = nodemailer.createTransport({
-      host: this.configService.get<string>('SMTP_HOST', 'diotek.xyz'),
+      host: this.configService.get<string>('SMTP_HOST', 'primess@diotek.xyz'),
       port: this.configService.get<number>('SMTP_PORT', 587),
       secure: false,
       auth: {
-        user: this.configService.get<string>('SMTP_USER', 'hovo@diotek.xyz'),
-        pass: this.configService.get<string>('SMTP_PASS', 'your-password:)'),
+        user: this.configService.get<string>('SMTP_USER', 'primess@diotek.xyz'),
+        pass: this.configService.get<string>('SMTP_PASS', 'root1234'),
       },
     });
   }
@@ -34,7 +33,7 @@ export class MailService {
       if (template) {
         const templatePath = join(
           __dirname,
-          '../..',
+          '../../../',
           'templates',
           `${template}.hbs`,
         );
@@ -46,7 +45,7 @@ export class MailService {
       await this.transporter.sendMail({
         from: this.configService.get<string>(
           'SMTP_FROM',
-          '"Diotek" <hovo@diotek.xyz>',
+          '"Diotek" <primess@diotek.xyz>',
         ),
         to,
         subject,
@@ -56,7 +55,9 @@ export class MailService {
       console.log(`Email sent to ${to}`);
     } catch (error) {
       console.error('Error sending email:', error);
-      throw new Error(`Failed to send email: ${error.message}`);
+      throw new Error(
+        `Failed to send email: ${error instanceof Error ? error.message : String(error)}`,
+      );
     }
   }
 }

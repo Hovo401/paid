@@ -6,12 +6,11 @@ import { UserModule } from './user/user.module';
 import { MessageModule } from './message/message.module';
 import { ConfigModule } from '@nestjs/config';
 
-
 @Module({
   imports: [
     ConfigModule.forRoot({
-      isGlobal: true, 
-      envFilePath: ['.env', '.env.production.local'], 
+      isGlobal: true,
+      envFilePath: ['.env', '.env.production.local'],
     }),
     AuthModule,
     UserModule,
