@@ -162,7 +162,7 @@ jobs:
 
           # Apply schema to the persistent SQLite DB (fails on destructive change).
           set -a; . ${APP_DIR}/shared/.env; set +a
-          corepack pnpm prisma db push --skip-generate
+          corepack pnpm prisma db push
 
           # Atomic switch + reload.
           ln -sfn ${RELEASE_DIR} ${APP_DIR}/current
