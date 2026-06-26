@@ -6,7 +6,6 @@ import {
   HttpStatus,
   Post,
   Request,
-  UseGuards,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { Public } from './constants';
@@ -43,7 +42,7 @@ export class AuthController {
     body.password = await this.authService.hashPassword(body.password);
     const user = await this.usersService.createUser(body);
     const payload = { sub: user?.id, email: user?.email, roles: user?.roles };
-    this.mailService.sendMail(
+    await this.mailService.sendMail(
       user.email,
       'Welcome to Paidemail',
       'Thank you for registering with Paidemail!',

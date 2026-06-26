@@ -8,8 +8,6 @@ import {
   Put,
 } from '@nestjs/common';
 import { UserService } from './user.service';
-import { Roles } from '@src/auth/roles.decorator';
-import { Role } from '@src/enums/role.enum';
 import { Public } from '@src/auth/constants';
 import { signInDto } from '@src/auth/dto/signInDto';
 
