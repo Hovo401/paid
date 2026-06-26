@@ -1,0 +1,58 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: dockerfile
+    container_name: paidemail-backend
+    environment:
+      NODE_ENV: development
+      DATABASE_URL: file:./dev.db
+    ports:
+      - "8000:8000"
+    working_dir: /app
+    command: ["pnpm", "run", "start:prod"]
+    restart: unless-stopped
+
+    develop:
+      watch:
+        - path: ./backend/package.json
+          target: /app/package.json
+          action: rebuild
+
+        - path: ./backend
+          target: /app
+          action: sync
+          ignore:
+            - node_modules/
+            - dist/
+            - .git/
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: paidemail-frontend
+    environment:
+      NODE_ENV: development
+      VITE_API_URL: "http://localhost:8000"
+    ports:
+      - "5173:5173"
+    working_dir: /app
+    command: ["pnpm", "dev", "--host"]
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+    develop:
+      watch:
+        - path: ./frontend/package.json
+          target: /app/package.json
+          action: rebuild
+
+        - path: ./frontend
+          target: /app
+          action: sync
+          ignore:
+            - node_modules/
+            - dist/
+            - .git/

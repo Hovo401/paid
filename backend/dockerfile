@@ -16,28 +16,22 @@ COPY . .
 RUN pnpm prisma generate
 RUN pnpm build
 
-# === СОЗДАЁМ БАЗУ ЗДЕСЬ (в builder) ===
 ENV DATABASE_URL="file:./dev.db"
 RUN pnpm prisma db push
-# =====================================
 
 FROM node:24-alpine
 
 RUN corepack enable
 WORKDIR /app
 
-# Ставим только production-зависимости
 COPY --from=builder /app/package.json /app/pnpm-lock.yaml ./
 RUN pnpm install --prod --frozen-lockfile
 
-# Скомпилированный код (Prisma Client уже собран внутрь dist на этапе build)
 COPY --from=builder /app/dist ./dist
 
-# Схема и конфиг Prisma (на случай миграций/db push в рантайме)
 COPY prisma.config.ts ./
 COPY --from=builder /app/prisma ./prisma
 
-# Копируем уже созданную базу из builder
 COPY --from=builder /app/dev.db ./dev.db
 
 EXPOSE 3000

@@ -75,7 +75,11 @@ function Home() {
           className="w-[100%] flex justify-center gap-15 mt-10 mb-20 flex-wrap text-[15px] text-white  "
         >
           <div className="bg-[#1E3A8A] p-5 py-5 w-[300px] shadow-2xl dark:shadow-bg_c_2-dark max-h-[500px] rounded-2xl bg-gradient-to-br from-[#868CFF] to-[#4318FF]">
-            <img className="w-[60px] m-auto pb-2" src="static/Group.svg" alt="" />
+            <img
+              className="w-[60px] m-auto pb-2"
+              src="static/Group.svg"
+              alt=""
+            />
             <h3 className="text-center text-[20px] mb-3">
               {t('HowItWorks.1t')}
             </h3>
