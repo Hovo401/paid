@@ -157,9 +157,8 @@ jobs:
           ln -sfn ${APP_DIR}/shared/.env       ${RELEASE_DIR}/.env
           ln -sfn ${APP_DIR}/shared/database   ${RELEASE_DIR}/database
 
-          # Install prod deps + generate the platform-native Prisma engine on the server.
+          # Install prod deps; the postinstall hook generates the Prisma client on the server.
           corepack pnpm install --prod --frozen-lockfile
-          corepack pnpm prisma generate
 
           # Apply schema to the persistent SQLite DB (fails on destructive change).
           set -a; . ${APP_DIR}/shared/.env; set +a
