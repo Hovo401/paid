@@ -1,3 +1,4 @@
+import type { Dispatch, SetStateAction } from 'react';
 import type { userDB } from '../../../Types/api.types';
 
 function AccauntComponent({
@@ -6,8 +7,8 @@ function AccauntComponent({
   userDB,
 }: {
   userDB: userDB | null;
-  setCategoriesSitebarOpen: any;
-  CategoriesSitebarOpen: any;
+  setCategoriesSitebarOpen: Dispatch<SetStateAction<boolean>>;
+  CategoriesSitebarOpen: boolean;
 }) {
   return (
     <>

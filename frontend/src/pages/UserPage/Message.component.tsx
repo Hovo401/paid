@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, type Dispatch, type SetStateAction } from 'react';
 import type { userDB } from '../../Types/api.types';
 import api from '../../api/api';
 
@@ -6,7 +6,7 @@ function Message({
   setMessageOpen,
   user,
 }: {
-  setMessageOpen: any;
+  setMessageOpen: Dispatch<SetStateAction<boolean>>;
   user: userDB;
 }) {
   const [subject, setSubject] = useState('');
@@ -17,7 +17,7 @@ function Message({
       <div className="w-full">
         <div
           className={`fixed  top-[52px] inset-0 h-[200%] w-full  transform duration-1000
-              ${true ? 'bg-[rgba(0,0,0,.6)]' : 'bg-[rgba(0,0,0,0)] hidden '}  `}
+              bg-[rgba(0,0,0,.6)]  `}
           onClick={() => setMessageOpen(false)}
         ></div>
         <div className=" text_c_0 fixed rounded-2xl p-2.5 w-[95%] max-w-[500px] min-h-25 bg_c_1 t_c_1000 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">

@@ -10,7 +10,7 @@ function CategoriesSitebar() {
     region: "",
   });
 
-  const handleSocialChange = (value: any) => {
+  const handleSocialChange = (value: string) => {
     setFilters((prev) => {
       const newSocial = prev.social.includes(value)
         ? prev.social.filter((item) => item !== value)
@@ -19,11 +19,11 @@ function CategoriesSitebar() {
     });
   };
 
-  const handleFilterChange = (field: any, value: any) => {
+  const handleFilterChange = (field: keyof typeof filters, value: string | number[]) => {
     setFilters((prev) => ({ ...prev, [field]: value }));
   };
 
-  const handlePriceChange = (option: any) => {
+  const handlePriceChange = (option: string) => {
     let newRange;
     switch (option) {
       case "$0 - $25":
