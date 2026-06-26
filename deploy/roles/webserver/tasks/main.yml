@@ -106,6 +106,24 @@
     enabled: true
     state: started
 
+# A lost handler (e.g. an aborted run between writing the TLS vhost and the
+# end-of-play flush) leaves the on-disk config correct but the running nginx
+# stuck on the old one. The template then stays idempotent on re-run, so no
+# handler ever fires again. Reconcile against the live socket instead.
+- name: Check whether nginx is actually serving TLS
+  ansible.builtin.command: ss -ltnH sport = :443
+  register: nginx_tls_socket
+  changed_when: false
+  when: tls_enabled
+
+- name: Reload nginx if it is not listening on 443 yet
+  ansible.builtin.systemd:
+    name: nginx
+    state: reloaded
+  when:
+    - tls_enabled
+    - nginx_tls_socket.stdout | trim == ""
+
 - name: Add nginx reload hook for certificate renewals
   ansible.builtin.copy:
     dest: /etc/letsencrypt/renewal-hooks/deploy/reload-nginx.sh
