@@ -1,0 +1,188 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: # allow manual re-deploy of main
+
+permissions:
+  contents: read
+
+# Never run two production deploys at once; let an in-flight deploy finish.
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build artifacts
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
+      # --- Backend ---
+      - uses: ./.github/actions/setup-node-pnpm
+        with:
+          working-directory: backend
+
+      - name: Build backend
+        working-directory: backend
+        run: |
+          pnpm prisma generate
+          pnpm build
+
+      - name: Stage backend release
+        run: |
+          mkdir -p staging/backend
+          cp -r backend/dist backend/prisma staging/backend/
+          cp backend/package.json backend/pnpm-lock.yaml backend/prisma.config.ts staging/backend/
+
+      - name: Upload backend artifact
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: backend-release
+          path: staging/backend
+          retention-days: 7
+
+      # --- Frontend ---
+      - uses: ./.github/actions/setup-node-pnpm
+        with:
+          working-directory: frontend
+
+      - name: Build frontend
+        working-directory: frontend
+        env:
+          # Public API base URL, baked into the bundle at build time.
+          VITE_API_URL: ${{ vars.VITE_API_URL }}
+        run: pnpm build
+
+      - name: Upload frontend artifact
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: frontend-dist
+          path: frontend/dist
+          retention-days: 7
+
+  deploy:
+    name: Deploy to production
+    needs: build
+    runs-on: ubuntu-latest
+    # Environment scopes the deploy secrets and records a deployment in the repo's history.
+    environment:
+      name: production
+      url: https://${{ secrets.SSH_HOST }}
+    env:
+      APP_DIR: /opt/paidemail
+      FRONTEND_DIR: /var/www/paidemail
+      RELEASE_DIR: /opt/paidemail/releases/${{ github.run_id }}
+      KEEP_RELEASES: 5
+    steps:
+      - name: Download backend artifact
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: backend-release
+          path: backend-release
+
+      - name: Download frontend artifact
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: frontend-dist
+          path: frontend-dist
+
+      - name: Start SSH agent
+        uses: webfactory/ssh-agent@a6f90b1f127823b31d4d4a8d96047790581349bd # v0.9.1
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Pin known host key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_KNOWN_HOSTS }}" >> ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+
+      - name: Write backend production env
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_SECURE: ${{ secrets.SMTP_SECURE }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          SMTP_FROM: ${{ secrets.SMTP_FROM }}
+        run: |
+          umask 077
+          cat > prod.env <<EOF
+          DATABASE_URL=${DATABASE_URL}
+          SMTP_HOST=${SMTP_HOST}
+          SMTP_PORT=${SMTP_PORT}
+          SMTP_SECURE=${SMTP_SECURE}
+          SMTP_USER=${SMTP_USER}
+          SMTP_PASS=${SMTP_PASS}
+          SMTP_FROM=${SMTP_FROM}
+          EOF
+
+      - name: Upload release to server
+        env:
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+        run: |
+          REMOTE="${SSH_USER}@${SSH_HOST}"
+          # Ensure the shared layout exists before first deploy.
+          ssh "$REMOTE" "mkdir -p ${APP_DIR}/releases ${APP_DIR}/shared/database ${RELEASE_DIR}"
+          # Backend release (atomic dir, switched via symlink afterwards).
+          rsync -az --delete backend-release/ "$REMOTE:${RELEASE_DIR}/"
+          # Shared secrets file (0600), never inside the versioned release.
+          rsync -az prod.env "$REMOTE:${APP_DIR}/shared/.env"
+          # Frontend goes to a staging dir owned by the SSH user; sudo moves it into the www root.
+          rsync -az --delete frontend-dist/ "$REMOTE:${APP_DIR}/shared/frontend-next/"
+
+      - name: Activate release
+        env:
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+        run: |
+          ssh "${SSH_USER}@${SSH_HOST}" bash -eu <<EOF
+          set -o pipefail
+          export PATH="\$HOME/.local/share/pnpm:\$PATH"
+          corepack enable >/dev/null 2>&1 || true
+
+          cd ${RELEASE_DIR}
+          # Link shared state into the release.
+          ln -sfn ${APP_DIR}/shared/.env       ${RELEASE_DIR}/.env
+          ln -sfn ${APP_DIR}/shared/database   ${RELEASE_DIR}/database
+
+          # Install prod deps + generate the platform-native Prisma engine on the server.
+          corepack pnpm install --prod --frozen-lockfile
+          corepack pnpm prisma generate
+
+          # Apply schema to the persistent SQLite DB (fails on destructive change).
+          set -a; . ${APP_DIR}/shared/.env; set +a
+          corepack pnpm prisma db push --skip-generate
+
+          # Atomic switch + reload.
+          ln -sfn ${RELEASE_DIR} ${APP_DIR}/current
+          pm2 reload ${APP_DIR}/ecosystem.config.js --update-env
+          pm2 save
+
+          # Publish frontend (www-data root needs sudo).
+          sudo rsync -a --delete ${APP_DIR}/shared/frontend-next/ ${FRONTEND_DIR}/
+          sudo chown -R www-data:www-data ${FRONTEND_DIR}
+
+          # Prune old releases, keep the newest \$KEEP.
+          KEEP=${KEEP_RELEASES}
+          cd ${APP_DIR}/releases
+          ls -1dt */ | tail -n +\$((KEEP + 1)) | xargs -r rm -rf
+          EOF
+
+      - name: Health check
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+        run: |
+          for i in 1 2 3 4 5; do
+            if curl -fsS "https://${SSH_HOST}/api/health" >/dev/null; then
+              echo "Health check passed"; exit 0
+            fi
+            echo "Attempt $i failed; retrying..."; sleep 5
+          done
+          echo "Health check failed — roll back with: ln -sfn releases/<previous> ${APP_DIR}/current && pm2 reload ${APP_DIR}/ecosystem.config.js"
+          exit 1

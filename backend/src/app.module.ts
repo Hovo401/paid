@@ -5,6 +5,7 @@ import { UserModule } from './user/user.module';
 // import { SessionModule } from './session/session.module';
 import { MessageModule } from './message/message.module';
 import { ConfigModule } from '@nestjs/config';
+import { HealthController } from './health.controller';
 
 @Module({
   imports: [
@@ -16,7 +17,7 @@ import { ConfigModule } from '@nestjs/config';
     UserModule,
     MessageModule,
   ],
-  controllers: [],
+  controllers: [HealthController],
   providers: [],
 })
 export class AppModule {}
