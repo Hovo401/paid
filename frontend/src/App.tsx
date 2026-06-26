@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/home.page';
 import About from './pages/About.page';
 import Categories from './pages/Categories/Categories.page';
@@ -24,8 +24,7 @@ function App() {
       <div className="min-h-screen w-full max-w-full flex flex-grow flex-col pt-[50px] relative">
         <BrowserRouter basename="/">
           <Routes>
-            <Route path="/" element={<Navigate to="/home" replace />} />
-            <Route path="/home" element={<Home />} />
+            <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/cc" element={<Categories />} />
             <Route path="/HowItWorks" element={<HowItWorks />} />

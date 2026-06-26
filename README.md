@@ -10,11 +10,13 @@
 From the project root:
 
 ```bash
-cp .env.example .env
-# Replace REPLACE_ME values, or: ./infra/scripts/secrets/generate-secrets.sh > .env
-
 docker compose -f docker-compose.dev.yml up --watch
 ```
+
+Env loads from `backend/.env.example` and `frontend/.env.example` out of the box,
+so a fresh clone runs without setup. To override locally, copy either to `.env`
+(gitignored) in the same folder and edit it. See [docs/ENV.md](docs/ENV.md) for
+the full picture across local/CI/production.
 
 ### Services and ports
 
