@@ -25,12 +25,12 @@ RUN corepack enable
 WORKDIR /app
 
 COPY --from=builder /app/package.json /app/pnpm-lock.yaml ./
+COPY prisma.config.ts ./
+COPY --from=builder /app/prisma ./prisma
+
 RUN pnpm install --prod --frozen-lockfile
 
 COPY --from=builder /app/dist ./dist
-
-COPY prisma.config.ts ./
-COPY --from=builder /app/prisma ./prisma
 
 COPY --from=builder /app/dev.db ./dev.db
 
