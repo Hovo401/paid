@@ -1,0 +1,11 @@
+---
+- name: Provision {{ domain }}
+  hosts: web
+  become: true
+  roles:
+    - role: nodejs
+      tags: [nodejs]
+    - role: webserver
+      tags: [webserver, nginx, tls]
+    - role: app
+      tags: [app]

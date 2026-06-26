@@ -1,0 +1,13 @@
+module.exports = {
+  apps: [
+    {
+      name: 'paidemail-backend',
+      cwd: '{{ app_dir }}/backend',
+      script: 'dist/main.js',
+      env: {
+        NODE_ENV: 'production',
+        PORT: {{ backend_port }},
+      },
+    },
+  ],
+};
