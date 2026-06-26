@@ -70,13 +70,19 @@ jobs:
     # Environment scopes the deploy secrets and records a deployment in the repo's history.
     environment:
       name: production
-      url: https://${{ secrets.SSH_HOST }}
+      url: ${{ steps.meta.outputs.url }}
     env:
       APP_DIR: /opt/paidemail
       FRONTEND_DIR: /var/www/paidemail
       RELEASE_DIR: /opt/paidemail/releases/${{ github.run_id }}
       KEEP_RELEASES: 5
     steps:
+      - name: Resolve deployment URL
+        id: meta
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+        run: echo "url=https://$SSH_HOST" >> "$GITHUB_OUTPUT"
+
       - name: Download backend artifact
         uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
