@@ -1,4 +1,11 @@
 ---
+- name: Install rsync (used by CI to ship releases)
+  ansible.builtin.apt:
+    name: rsync
+    state: present
+    update_cache: true
+    cache_valid_time: 3600
+
 - name: Ensure the application group exists
   ansible.builtin.group:
     name: "{{ ansible_user }}"

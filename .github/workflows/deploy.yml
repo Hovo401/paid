@@ -135,8 +135,6 @@ jobs:
           REMOTE="${SSH_USER}@${SSH_HOST}"
           # Ensure the shared layout exists before first deploy.
           ssh "$REMOTE" "mkdir -p ${APP_DIR}/releases ${APP_DIR}/shared/database ${RELEASE_DIR}"
-          # rsync may be missing on a fresh server; install it before relying on it below.
-          ssh "$REMOTE" "command -v rsync >/dev/null || (sudo apt-get update -qq && sudo apt-get install -y -qq rsync)"
           # Backend release (atomic dir, switched via symlink afterwards).
           rsync -az --delete backend-release/ "$REMOTE:${RELEASE_DIR}/"
           # Shared secrets file (0600), never inside the versioned release.
