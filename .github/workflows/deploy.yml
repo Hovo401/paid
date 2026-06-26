@@ -161,7 +161,14 @@ jobs:
           corepack pnpm install --prod --frozen-lockfile
 
           # Apply schema to the persistent SQLite DB (fails on destructive change).
-          set -a; . ${APP_DIR}/shared/.env; set +a
+          # Export each line literally instead of dot-sourcing - some values
+          # (e.g. SMTP_FROM) contain spaces/quotes that break under shell sourcing.
+          set -a
+          while IFS='=' read -r key value; do
+            [[ -z "\$key" || "\$key" == \#* ]] && continue
+            export "\$key=\$value"
+          done < ${APP_DIR}/shared/.env
+          set +a
           corepack pnpm prisma db push
 
           # Atomic switch + reload.
