@@ -13,7 +13,6 @@ import MainAccaunt from './pages/accaunt/MainAccaunt.Page';
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 
-
 function App() {
   useEffect(() => {
     const darkMode_ = localStorage.getItem('darkMode') ?? 0;
@@ -23,7 +22,7 @@ function App() {
   return (
     <AuthProvider>
       <div className="min-h-screen w-full max-w-full flex flex-grow flex-col pt-[50px] relative">
-        <BrowserRouter basename="/paidemail">
+        <BrowserRouter basename="/">
           <Routes>
             <Route path="/" element={<Navigate to="/home" replace />} />
             <Route path="/home" element={<Home />} />
@@ -32,8 +31,11 @@ function App() {
             <Route path="/HowItWorks" element={<HowItWorks />} />
             <Route path="/Login" element={<Login />} />
             <Route path="/Registration" element={<Registration />} />
-            <Route path="/UserPage"  element={<UserPage />}  />
-            <Route path="/accaunt/*" element={<ProtectedRoute element={<MainAccaunt />} />} />
+            <Route path="/UserPage" element={<UserPage />} />
+            <Route
+              path="/accaunt/*"
+              element={<ProtectedRoute element={<MainAccaunt />} />}
+            />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
