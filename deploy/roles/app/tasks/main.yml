@@ -1,4 +1,9 @@
 ---
+- name: Ensure the application group exists
+  ansible.builtin.group:
+    name: "{{ ansible_user }}"
+    state: present
+
 - name: Create backend application directory
   ansible.builtin.file:
     path: "{{ app_dir }}"

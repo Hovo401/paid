@@ -1,0 +1,6 @@
+---
+# Provides the community.general.ufw module used by the firewall role.
+# Bundled in the willhallonline/ansible image; install explicitly for a bare
+# control machine: ansible-galaxy collection install -r requirements.yml
+collections:
+  - name: community.general

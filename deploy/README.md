@@ -18,6 +18,7 @@ inventory.ini          target host(s)
 group_vars/all.yml     domain, app_dir, static dir, backend port
 site.yml               entrypoint
 roles/
+  firewall/            ufw default-deny + 22/80/443
   nodejs/              Node.js + pm2 + pm2 systemd startup
   webserver/           nginx.org + vhost + certbot + auto-renew
   app/                 app dirs + pm2 ecosystem config
@@ -25,7 +26,10 @@ roles/
 
 ## Prerequisites
 
-- Ansible on the control machine (`pipx install --include-deps ansible`)
+- Ansible on the control machine (`pipx install --include-deps ansible`) plus
+  collections: `ansible-galaxy collection install -r requirements.yml`
+  (or use `run.ps1`, which runs a pinned `willhallonline/ansible` image that
+  already bundles them)
 - SSH access to the target as the user in `inventory.ini`, with sudo
 - DNS for `domain` already points at the server (certbot needs reachable :80)
 
@@ -53,6 +57,8 @@ ansible-playbook site.yml --ask-become-pass --tags webserver
 | `frontend_static_dir` | group_vars/all.yml       | `/var/www/paidemail` |
 | `backend_port`        | group_vars/all.yml       | `8000`               |
 | `node_major`          | roles/nodejs/defaults    | `"24"`               |
+| `pm2_version`         | roles/nodejs/defaults    | `"5.4.3"`            |
+| `ssh_port`            | roles/firewall/defaults  | `22`                 |
 | `nginx_repo_branch`   | roles/webserver/defaults | `""` (stable)        |
 | `certbot_webroot`     | roles/webserver/defaults | `/var/www/certbot`   |
 | `letsencrypt_email`   | roles/webserver/defaults | `""` (no email)      |

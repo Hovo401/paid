@@ -30,10 +30,16 @@
     state: present
     update_cache: true
 
-- name: Install pm2 globally
-  ansible.builtin.command: npm install -g pm2
-  args:
-    creates: /usr/bin/pm2
+- name: Check the installed pm2 version
+  ansible.builtin.command: pm2 --version
+  register: pm2_installed
+  failed_when: false
+  changed_when: false
+
+- name: Install pm2 {{ pm2_version }} globally
+  ansible.builtin.command: npm install -g pm2@{{ pm2_version }}
+  when: pm2_installed.rc != 0 or pm2_installed.stdout | trim != pm2_version
+  changed_when: true
 
 - name: Check whether the pm2 systemd unit already exists
   ansible.builtin.stat:
@@ -41,10 +47,6 @@
   register: pm2_unit
 
 - name: Configure pm2 systemd startup
-  ansible.builtin.shell: >
-    set -o pipefail &&
-    pm2 startup systemd -u {{ pm2_user }} --hp /home/{{ pm2_user }}
-    | grep -E '^sudo' | sh
-  args:
-    executable: /bin/bash
+  ansible.builtin.command:
+    cmd: pm2 startup systemd -u {{ pm2_user }} --hp /home/{{ pm2_user }}
   when: not pm2_unit.stat.exists
