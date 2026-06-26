@@ -63,6 +63,14 @@ ansible-playbook site.yml --ask-become-pass --tags webserver
 | `certbot_webroot`     | roles/webserver/defaults | `/var/www/certbot`   |
 | `letsencrypt_email`   | roles/webserver/defaults | `""` (no email)      |
 
+## Secrets
+
+`DATABASE_URL` (GitHub Actions secret, `production` environment) must be an
+absolute `file:` path under `{{ app_dir }}/shared/database`, e.g.
+`file:/opt/paidemail/shared/database/prod.db`. The backend reads this through
+two different sqlite drivers (Prisma's CLI engine for `db push`, `@libsql/client`
+at runtime) - a relative path can resolve to two different files between them.
+
 ## Not handled here
 
 Shipping application code. After build artifacts are in place
