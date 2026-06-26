@@ -1,0 +1,4 @@
+---
+nginx_repo_branch: ""
+certbot_webroot: /var/www/certbot
+letsencrypt_email: ""
