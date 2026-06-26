@@ -18,13 +18,11 @@ docker compose -f docker-compose.dev.yml up --watch
 
 ### Services and ports
 
-| Service  | Port | Purpose                   |
-| -------- | ---- | ------------------------- |
-| frontend | 3000 | Next.js application       |
-| frontend | 9229 | Node.js inspector         |
-| backend  | 8000 | FastAPI API               |
-| backend  | 5678 | debugpy (Python debugger) |
-| db       | 5432 | PostgreSQL                |
+| Service  | Port | Purpose                      |
+| -------- | ---- | ---------------------------- |
+| frontend | 5173 | react application dev server |
+| backend  | 8000 | Nest.js                      |
+| db       | 5432 | PostgreSQL                   |
 
 ### How it works
 
