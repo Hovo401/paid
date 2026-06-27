@@ -1,4 +1,4 @@
-domain: diotek.pp.ua
+domain: primess.diotek.pp.ua
 app_dir: /opt/paidemail
 frontend_static_dir: /var/www/paidemail
 backend_port: 8000
