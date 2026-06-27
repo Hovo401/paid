@@ -69,6 +69,10 @@ bundle. They never exist as runtime env on the server; the prod value is the
 GitHub repository variable `VITE_API_URL`, applied during the CI `vite build`.
 Anything in a `VITE_*` var ends up public in the browser, so never put a secret there.
 
+Changing the production domain means updating `VITE_API_URL` too — see
+[deploy/README.md § Changing the domain](../deploy/README.md#changing-the-domain)
+for the full procedure.
+
 ## Adding a variable
 
 - **Backend secret**: add to `backend/.env.example` (placeholder) + your

@@ -52,7 +52,7 @@ ansible-playbook site.yml --ask-become-pass --tags webserver
 
 | Variable              | Where                    | Default              |
 |-----------------------|--------------------------|----------------------|
-| `domain`              | group_vars/all.yml       | `diotek.pp.ua`       |
+| `domain`              | group_vars/all.yml       | `primess.diotek.pp.ua` |
 | `app_dir`             | group_vars/all.yml       | `/opt/paidemail`     |
 | `frontend_static_dir` | group_vars/all.yml       | `/var/www/paidemail` |
 | `backend_port`        | group_vars/all.yml       | `8000`               |
@@ -62,6 +62,43 @@ ansible-playbook site.yml --ask-become-pass --tags webserver
 | `nginx_repo_branch`   | roles/webserver/defaults | `""` (stable)        |
 | `certbot_webroot`     | roles/webserver/defaults | `/var/www/certbot`   |
 | `letsencrypt_email`   | roles/webserver/defaults | `""` (no email)      |
+
+## Changing the domain
+
+The domain is referenced in three independent places that must be updated together:
+
+1. **`group_vars/all.yml`** — set `domain:` to the new value. Drives the nginx
+   `server_name` and the Let's Encrypt cert request (`roles/webserver`).
+2. **`inventory.ini`** — the SSH target for the control machine. Only needs to
+   change if you were addressing the server by its old domain name; if you SSH
+   in by IP or a separate hostname, leave it as-is.
+3. **GitHub → Settings → Environments → `production`** (not managed by Ansible,
+   edit directly in the GitHub UI):
+   - Secret `SSH_HOST` → new domain
+   - Secret `SSH_KNOWN_HOSTS` → re-run `ssh-keyscan <new-domain>` and paste the output
+   - Repository variable `VITE_API_URL` → `https://<new-domain>/api` (baked into
+     the frontend bundle at build time, see `.github/workflows/deploy.yml`)
+
+DNS for the new domain must already point at the server before you proceed —
+certbot below needs `:80` reachable on that name.
+
+```bash
+cd deploy
+ansible-playbook site.yml --ask-become-pass --tags webserver
+```
+
+This renders a new vhost file at `/etc/nginx/conf.d/<new-domain>.conf` and
+issues a fresh Let's Encrypt cert. It does **not** remove the old vhost file —
+delete it manually on the server once the new one is confirmed working:
+
+```bash
+sudo rm /etc/nginx/conf.d/<old-domain>.conf
+sudo systemctl reload nginx
+```
+
+Then push to `main` (or re-run the `deploy.yml` workflow manually) so the
+frontend rebuilds with the new `VITE_API_URL` and the health check hits the
+new host. Verify by opening `https://<new-domain>` and `https://<new-domain>/api/health`.
 
 ## Secrets
 
