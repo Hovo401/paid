@@ -74,7 +74,9 @@ jobs:
     env:
       APP_DIR: /opt/paidemail
       FRONTEND_DIR: /var/www/paidemail
-      RELEASE_DIR: /opt/paidemail/releases/${{ github.run_id }}
+      # run_attempt makes re-runs land in a fresh dir instead of reusing (and
+      # mutating) the one the live process is already running from.
+      RELEASE_DIR: /opt/paidemail/releases/${{ github.run_id }}-${{ github.run_attempt }}
       KEEP_RELEASES: 5
     steps:
       - name: Resolve deployment URL
@@ -171,7 +173,9 @@ jobs:
           set +a
           corepack pnpm prisma db push
 
-          # Atomic switch + reload.
+          # Atomic switch: only flip `current` after deps + migrations succeeded
+          # in the new (isolated) release dir, then reload. The old release
+          # keeps serving until this line, so a re-run never touches it.
           ln -sfn ${RELEASE_DIR} ${APP_DIR}/current
           pm2 reload ${APP_DIR}/ecosystem.config.js --update-env
           pm2 save
