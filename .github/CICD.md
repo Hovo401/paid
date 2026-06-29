@@ -15,17 +15,36 @@ Backend uses an atomic release layout on the server:
 
 ```
 /opt/paidemail/
-  releases/<run_id>/        # each deploy; pnpm install --prod + prisma generate run here
+  releases/<run_id>-<run_attempt>/  # each deploy attempt; pnpm install --prod + prisma db push run here
   shared/
     .env                    # written from secrets (0600) — never in git
-    database/dev.db         # persistent SQLite, never overwritten
+    database/prod.db        # persistent SQLite, never overwritten
     frontend-next/          # staging for the SPA before sudo-publish
-  current -> releases/<id>  # pm2 cwd; flipped atomically after a healthy install
+  current -> releases/<id>  # pm2 cwd; flipped only after install + migrate succeed
 ```
 
 Frontend builds to static files and is published to `/var/www/paidemail` (served by nginx).
 
 Rollback: `ln -sfn releases/<previous> /opt/paidemail/current && pm2 reload /opt/paidemail/ecosystem.config.js`.
+
+### Why `run_id-run_attempt`
+
+`RELEASE_DIR` is keyed by both `github.run_id` and `github.run_attempt`, not
+just `run_id`. `run_attempt` starts at 1 and increments every time a workflow
+run is re-run. Without it, re-running a failed deploy would reuse the same
+directory that `current` already points at — and that the live pm2 process is
+running from — so `rsync --delete` and `pnpm install --prod` would rewrite the
+files of a process that's still serving traffic, causing a crash loop
+(`MODULE_NOT_FOUND` while `node_modules` is mid-rewrite) until the install
+finished.
+
+With a unique directory per attempt, every deploy — first try or re-run —
+builds and migrates in total isolation from the running release. The `current`
+symlink is the single atomic switch, flipped only once the new release is
+fully ready (`ln -sfn ${RELEASE_DIR} current`, after `pnpm install` and
+`prisma db push` succeed). The old release keeps serving until that one line
+runs, so a failed or in-progress build can never affect production, and
+rollback is just re-pointing the same symlink at the previous directory.
 
 ## One-time setup
 
@@ -43,7 +62,7 @@ Secrets:
 | `SSH_HOST`                                                                     | `diotek.pp.ua`                                                               |
 | `SSH_USER`                                                                     | `hovo`                                                                       |
 | `SSH_KNOWN_HOSTS`                                                              | Output of `ssh-keyscan diotek.pp.ua`                                         |
-| `DATABASE_URL`                                                                 | `file:/opt/paidemail/shared/database/dev.db`                                 |
+| `DATABASE_URL`                                                                 | `file:/opt/paidemail/shared/database/prod.db`                                |
 | `SMTP_HOST`, `SMTP_PORT`, `SMTP_SECURE`, `SMTP_USER`, `SMTP_PASS`, `SMTP_FROM` | Production mail settings                                                     |
 
 ### 3. Repository variable
